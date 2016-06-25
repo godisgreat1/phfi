@@ -204,15 +204,10 @@ public class ReportRequest extends SearchRequest{
 	public void setSlNo(Integer slNo) {
 		this.slNo = slNo;
 	}
-	/**
-	 * @return the maternityStatus
-	 */
+	
 	public String getMaternityStatus() {
 		return maternityStatus;
 	}
-	/**
-	 * @param maternityStatus the maternityStatus to set
-	 */
 	public void setMaternityStatus(String maternityStatus) {
 		this.maternityStatus = maternityStatus;
 	}
