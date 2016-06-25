@@ -43,7 +43,7 @@
 							<input type="submit" id="buttonCreate" class="button" value=" List of women" style="height: 25px" onclick="document.location.href='show-phfi-registration-search';">
 							<!-- <input type="submit" id="buttonCreate" class="button"  value="ASHA feedback report" style="height: 25px;" onclick="return submitData()"> -->
 							<!-- <input type="submit" id="buttonCreate" class="button" value="Medical Case Sheet: Basic" style="height: 25px" onclick="document.location.href='show-medical-case-sheet';"> -->
-							<input type="submit" id="buttonCreate" class="button"  value="Medical Case Sheet : Advanced" style="height: 25px;" onclick="document.location.href='get-master-reports';">
+							<input type="submit" id="buttonCreate" class="button"  value="Master Report" style="height: 25px;" onclick="document.location.href='get-master-reports';">
 							<input type="submit" id="buttonCreate" class="button" value="Master Raw Data" style="height: 25px" onclick="document.location.href='phfi-raw-data-dashboard';">
 							<input type="submit" id="buttonCreate" class="button"  value="Doctor Pregnant Report" style="height: 25px;" onclick="document.location.href='get-doctor-ratified-reports?maternityStatus=Pregnant';">
 							<input type="submit" id="buttonCreate" class="button"  value="Doctor Postpartum Report" style="height: 25px;" onclick="document.location.href='get-doctor-ratified-reports?maternityStatus=Postpartum';">

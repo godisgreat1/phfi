@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.FormParam;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,10 @@ import com.smh.model.PhfiVisitResponse;
 import com.smh.model.ReportRequest;
 import com.smh.model.ReportResponse;
 import com.smh.service.ReportService;
+import com.smh.util.AshaReportDownload;
 import com.smh.util.DeliveryMasterRawDataUtil;
+import com.smh.util.DoctorReportDownload;
+import com.smh.util.MasterReportDownload;
 import com.smh.util.PaginationUtil;
 import com.smh.util.PostpartumMasterRawDataUtil;
 import com.smh.util.PreganancyMasterRawDataUtil;
@@ -103,6 +107,7 @@ public class ReportController extends BaseController implements URLMappingConsta
 		
 		try {
 			reportRequest.setMaternityStatus(request.getParameter("maternityStatus"));
+			model.put("womanType", request.getParameter("maternityStatus"));
 			model.put("reportRequest", new ReportRequest());
 			reportRequest.setPageIndex(Constant.ONE);
 			reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
@@ -141,6 +146,7 @@ public class ReportController extends BaseController implements URLMappingConsta
 		try {
 			reportRequest.setMaternityStatus(request.getParameter("maternityStatus"));
 			model.put("reportRequest", new ReportRequest());
+			model.put("womanType", request.getParameter("maternityStatus"));
 			reportRequest.setPageIndex(Constant.ONE);
 			reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
 			ReportResponse reportResponse = reportService.getMasterReport(reportRequest);
@@ -281,5 +287,95 @@ public class ReportController extends BaseController implements URLMappingConsta
 		}
 	    return null;
 	  }
+	 
+	 	@RequestMapping(value = DOWNLOAD_MASTER_REPORT, method = RequestMethod.POST)
+		public ModelAndView getMasterReport(HttpServletRequest request,
+											HttpServletResponse response, 
+											Map model, HttpSession session,
+											@FormParam("downLoadPageNumber") final Integer downLoadPageNumber,
+											@FormParam("downloadType") final String downloadType) {
+			ModelAndView modelAndView = new ModelAndView(SHOW_MASTER_REPORT);
+			logger.info("Entering :: ReportController ::getMasterReport method ");
+			ReportRequest reportRequest = new ReportRequest();
+			try {
+				model.put("reportRequest",reportRequest);
+				reportRequest.setPageIndex(Constant.ONE);
+				reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
+				ReportResponse reportResponse = reportService.getMasterReport(reportRequest);
+				if (reportResponse != null && !CollectionUtils.isEmpty(reportResponse.getReportRequest())) {
+
+					if (Constant.PDF_FILE_FORMAT.equalsIgnoreCase(downloadType)) {
+					} else if (Constant.XLS_FILE_FORMAT.equalsIgnoreCase(downloadType)) {
+						MasterReportDownload.downloadMasterReportXl(reportResponse.getReportRequest(), response);
+					}
+				}
+			} catch (Exception e) {
+				logger.error("Error :: ReportController ::getMasterReport method ", e);
+				modelAndView.setViewName(INVALID_PAGE);
+			}
+			logger.info("Exiting :: ReportController ::getMasterReport method ");
+			return modelAndView;
+		}
 	
+	 	@RequestMapping(value = DOWNLOAD_DOCTOR_REPORT, method = RequestMethod.POST)
+		public ModelAndView getDoctorReport(HttpServletRequest request,
+											HttpServletResponse response, 
+											Map model, HttpSession session,
+											@FormParam("downLoadPageNumber") final Integer downLoadPageNumber,
+											@FormParam("downloadType") final String downloadType,
+											@FormParam("womanType") final String womanType) {
+			ModelAndView modelAndView = new ModelAndView(SHOW_DOCTOR_RATIFIED_REPORT);
+			logger.info("Entering :: ReportController ::getMasterReport method ");
+			ReportRequest reportRequest = new ReportRequest();
+			try {
+				reportRequest.setMaternityStatus(womanType);
+				model.put("reportRequest", new ReportRequest());
+				reportRequest.setPageIndex(Constant.ONE);
+				reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
+				ReportResponse reportResponse = reportService.getMasterReport(reportRequest);
+				if (reportResponse != null && !CollectionUtils.isEmpty(reportResponse.getReportRequest())) {
+
+					if (Constant.PDF_FILE_FORMAT.equalsIgnoreCase(downloadType)) {
+					} else if (Constant.XLS_FILE_FORMAT.equalsIgnoreCase(downloadType)) {
+						DoctorReportDownload.downloadDoctorReportXl(reportResponse.getReportRequest(), response);
+					}
+				}
+			} catch (Exception e) {
+				logger.error("Error :: ReportController ::getMasterReport method ", e);
+				modelAndView.setViewName(INVALID_PAGE);
+			}
+			logger.info("Exiting :: ReportController ::getMasterReport method ");
+			return modelAndView;
+		}
+	 	@RequestMapping(value = DOWNLOAD_ASHA_FEEDBACK_REPORT, method = RequestMethod.POST)
+		public ModelAndView getAshaFeedbackReport(HttpServletRequest request,
+											HttpServletResponse response, 
+											Map model, HttpSession session,
+											@FormParam("downLoadPageNumber") final Integer downLoadPageNumber,
+											@FormParam("downloadType") final String downloadType,
+											@FormParam("womanType") final String womanType) {
+			ModelAndView modelAndView = new ModelAndView(SHOW_ASHA_FEEDBACK_REPORT);
+			logger.info("Entering :: ReportController ::getMasterReport method ");
+			ReportRequest reportRequest = new ReportRequest();
+			try {
+				reportRequest.setMaternityStatus(womanType);
+				model.put("reportRequest", new ReportRequest());
+				reportRequest.setPageIndex(Constant.ONE);
+				reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
+				ReportResponse reportResponse = reportService.getMasterReport(reportRequest);
+				if (reportResponse != null && !CollectionUtils.isEmpty(reportResponse.getReportRequest())) {
+
+					if (Constant.PDF_FILE_FORMAT.equalsIgnoreCase(downloadType)) {
+					} else if (Constant.XLS_FILE_FORMAT.equalsIgnoreCase(downloadType)) {
+						AshaReportDownload.downloadAshaReportXl(reportResponse.getReportRequest(), response);
+					}
+				}
+			} catch (Exception e) {
+				logger.error("Error :: ReportController ::getMasterReport method ", e);
+				modelAndView.setViewName(INVALID_PAGE);
+			}
+			logger.info("Exiting :: ReportController ::getMasterReport method ");
+			return modelAndView;
+		}
+	 	
 }

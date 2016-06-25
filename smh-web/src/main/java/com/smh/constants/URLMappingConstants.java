@@ -241,4 +241,13 @@ public interface URLMappingConstants {
 	
 	public static final String FETCH_WOMEN_NAME_BY_ID = "doAjaxFetchWomenNameByID";
 	
+	public static final String DOWNLOAD_REGISTRATION_REPORT = "downloadRegistrationReport";
+	
+	public static final String DOWNLOAD_MASTER_REPORT = "getmasterReport";
+	
+	public static final String DOWNLOAD_DOCTOR_REPORT = "getDoctorReport";
+	
+	public static final String DOWNLOAD_ASHA_FEEDBACK_REPORT = "getAshaFeedbackReport";
+	
+	
 }

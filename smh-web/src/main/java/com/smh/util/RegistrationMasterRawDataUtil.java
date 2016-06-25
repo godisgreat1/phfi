@@ -1,6 +1,7 @@
 package com.smh.util;
 
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -84,26 +85,26 @@ public class RegistrationMasterRawDataUtil
 			for(PhfiRegistrationRequest registrationRequest : rawDataRequest){
 				int i=0;
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getUid() != null) ? registrationRequest.getUid() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getVillageName() != null) ? URLEncoder.encode(registrationRequest.getVillageName(), "UTF-8") : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getPhc()!= null) ? registrationRequest.getPhc() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getAshaName()!= null) ? URLEncoder.encode(registrationRequest.getAshaName(),"UTF-8") : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getAnmName()!= null) ? registrationRequest.getAnmName() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getAshaFacilitatorName() != null) ? registrationRequest.getAshaFacilitatorName(): " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getVillageName() != null) ? URLDecoder.decode(registrationRequest.getVillageName(), "UTF-8") : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getPhc()!= null) ? URLDecoder.decode(registrationRequest.getPhc(),"UTF-8") : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getAshaName()!= null) ? URLDecoder.decode(registrationRequest.getAshaName(),"UTF-8") : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getAnmName()!= null) ? URLDecoder.decode(registrationRequest.getAnmName(),"UTF-8") : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getAshaFacilitatorName() != null) ? URLDecoder.decode(registrationRequest.getAshaFacilitatorName(),"UTF-8"): " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getRegDate() != null) ? registrationRequest.getRegDate() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getWomenFirstName()!= null) ? registrationRequest.getWomenFirstName() +" "+registrationRequest.getWomenSurname() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getWomenHusbandName()!= null) ? registrationRequest.getWomenHusbandName() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getMaternityStatus() != null) ? registrationRequest.getMaternityStatus(): " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getStreetMarital()!= null) ? registrationRequest.getStreetMarital()+";"+registrationRequest.getLandmarkMarital()+";"+registrationRequest.getVillageMarital()+";"+registrationRequest.getTalukMarital()+";"+registrationRequest.getDistrictMarital() : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getWomenFirstName()!= null) ? URLDecoder.decode(registrationRequest.getWomenFirstName(),"UTF-8") +" "+URLDecoder.decode(registrationRequest.getWomenSurname(),"UTF-8") : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getWomenHusbandName()!= null) ? URLDecoder.decode(registrationRequest.getWomenHusbandName(),"UTF-8") : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getMaternityStatus() != null) ? URLDecoder.decode(registrationRequest.getMaternityStatus(),"UTF-8"): " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getStreetMarital()!= null) ? URLDecoder.decode(registrationRequest.getStreetMarital(),"UTF-8")+";"+URLDecoder.decode(registrationRequest.getLandmarkMarital(),"UTF-8")+";"+URLDecoder.decode(registrationRequest.getVillageMarital(),"UTF-8")+";"+URLDecoder.decode(registrationRequest.getTalukMarital(),"UTF-8")+";"+URLDecoder.decode(registrationRequest.getDistrictMarital(),"UTF-8") : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getPhone1Marital()!= null) ? registrationRequest.getPhone1Marital() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getStreetNatal()!= null) ? registrationRequest.getStreetNatal()+";"+registrationRequest.getLandmarkNatal()+";"+registrationRequest.getVillageNatal()+";"+registrationRequest.getTalukNatal()+";"+registrationRequest.getDistrictNatal() : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getStreetNatal()!= null) ? URLDecoder.decode(registrationRequest.getStreetNatal(),"UTF-8")+";"+URLDecoder.decode(registrationRequest.getLandmarkNatal(),"UTF-8")+";"+URLDecoder.decode(registrationRequest.getVillageNatal(),"UTF-8")+";"+URLDecoder.decode(registrationRequest.getTalukNatal(),"UTF-8")+";"+URLDecoder.decode(registrationRequest.getDistrictNatal(),"UTF-8") : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getPhone1Natal()!= null) ? registrationRequest.getPhone1Natal() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getOtherCurrentPlace()!= null) ? registrationRequest.getOtherCurrentPlace() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getOtherCurrentPlace() != null) ? registrationRequest.getOtherCurrentPlace(): " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getAge()!= null) ? registrationRequest.getAge() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getEducation()!= null) ? registrationRequest.getEducation() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getEducationOther() != null) ? registrationRequest.getEducationOther(): " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getEducationOther() != null) ? URLDecoder.decode(registrationRequest.getEducationOther(),"UTF-8"): " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getReligion()!= null) ? registrationRequest.getReligion() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getOtherReligion() != null) ? registrationRequest.getOtherReligion(): " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getOtherReligion() != null) ? URLDecoder.decode(registrationRequest.getOtherReligion(),"UTF-8"): " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getCaste()!= null) ? registrationRequest.getCaste() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getCastcategory()!= null) ? registrationRequest.getCastcategory() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getDiabetes() != null) ? registrationRequest.getDiabetes(): " ") + ""));
@@ -111,8 +112,8 @@ public class RegistrationMasterRawDataUtil
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getHeartdisease()!= null) ? registrationRequest.getHeartdisease() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getAnaemia()!= null) ? registrationRequest.getAnaemia() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getThyroidproblem()!= null) ? registrationRequest.getThyroidproblem() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getAnyotherproblem() != null) ? registrationRequest.getAnyotherproblem(): " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getProblemDesc()!= null) ? registrationRequest.getProblemDesc(): " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getAnyotherproblem() != null) ? URLDecoder.decode(registrationRequest.getAnyotherproblem(),"UTF-8"): " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getProblemDesc()!= null) ? URLDecoder.decode(registrationRequest.getProblemDesc(),"UTF-8"): " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getPregnancyCount()!= null) ? registrationRequest.getPregnancyCount() : " ") + ""));
 				
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getNoOfChildren() != null) ? registrationRequest.getNoOfChildren(): " ") + ""));

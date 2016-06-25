@@ -3,6 +3,7 @@
  */
 package com.smh.util;
 
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -127,7 +128,7 @@ public class PostpartumMasterRawDataUtil {
 			for(PhfiPostPartumVisitRequest registrationRequest : phfiPostPartumVisitRequest){
 				int i=0;
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getWid() != null) ? registrationRequest.getWid() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getWomanName() != null) ? registrationRequest.getWomanName() : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getWomanName() != null) ? URLDecoder.decode(registrationRequest.getWomanName(),"UTF-8") : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getVisitDate()!= null) ? registrationRequest.getVisitDate() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getIsConsciousness()!= null) ? registrationRequest.getIsConsciousness() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getIsFits()!= null) ? registrationRequest.getIsFits() : " ") + ""));

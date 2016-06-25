@@ -6,10 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.FormParam;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,7 @@ import com.smh.constants.Constant;
 import com.smh.constants.PHFIWebConstant;
 import com.smh.constants.URLMappingConstants;
 import com.smh.exception.SmhAdminException;
+import com.smh.model.AdminUserRequest;
 import com.smh.model.AllWidResponse;
 import com.smh.model.AllWomenResponse;
 import com.smh.model.PhfiDeliveryFormRequest;
@@ -33,6 +36,7 @@ import com.smh.service.RegistrationService;
 import com.smh.util.JsonUtil;
 import com.smh.util.PaginationUtil;
 import com.smh.util.Properties;
+import com.smh.util.RegistrationMngtReport;
 import com.smh.util.StringUtil;
 
 @Controller
@@ -396,6 +400,37 @@ public class RegistrationController extends BaseController implements URLMapping
 		return jsonData;
 
 	}
+	
+	@RequestMapping(value = DOWNLOAD_REGISTRATION_REPORT, method = RequestMethod.POST)
+	public ModelAndView getReportPage(HttpServletRequest request,
+										HttpServletResponse response, 
+										Map model, HttpSession session,
+										@FormParam("downLoadPageNumber") final Integer downLoadPageNumber,
+										@FormParam("downloadType") final String downloadType) {
+		ModelAndView modelAndView = new ModelAndView(PHFI_REG_SEARCH);
+		logger.info("Entering :: AdminUserController ::getReportPage method ");
+		PhfiRegistrationResponse registrationResponse = null;
+		PhfiRegistrationRequest phfiRegistrationRequest = new PhfiRegistrationRequest();
+		try {
+			phfiRegistrationRequest.setPageIndex(downLoadPageNumber);
+			phfiRegistrationRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
+			 registrationResponse = registrationService.getRegistedWoman(phfiRegistrationRequest);
+			if (registrationResponse != null && !CollectionUtils.isEmpty(registrationResponse.getPhfiRegistrationRequest())) {
+
+				if (Constant.PDF_FILE_FORMAT.equalsIgnoreCase(downloadType)) {
+					/*RegistrationMngtReport.downloadRegistrationPdf(registrationResponse.getPhfiRegistrationRequest(), response);*/
+				} else if (Constant.XLS_FILE_FORMAT.equalsIgnoreCase(downloadType)) {
+					RegistrationMngtReport.downloadRegistrationXl(registrationResponse.getPhfiRegistrationRequest(), response);
+				}
+			}
+		} catch (Exception e) {
+			logger.error("Error :: AdminUserController ::getReportPage method ", e);
+			modelAndView.setViewName(INVALID_PAGE);
+		}
+		logger.info("Exiting :: AdminUserController ::getReportPage method ");
+		return modelAndView;
+	}
+
 
 	
 	

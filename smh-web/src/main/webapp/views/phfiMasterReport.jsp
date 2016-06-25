@@ -5,6 +5,7 @@
 <%@ page import="com.smh.constants.Constant"%>
 <%@page import="com.smh.constants.JspConstants"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import="com.smh.constants.PHFIWebConstant"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +62,7 @@
 								<form action="beacon-mgmt-update" name="editBeacon" method="post">
 									<input type="hidden" name="editId" id="editId" />
 								</form>
-								<form action="getBeaconReport" name="downloadReport" method="post">
+								<form action="getmasterReport" name="downloadReport" method="post">
 									<input type="hidden" id="downloadPageNumberId" name="downLoadPageNumber" /> 
 									<input type="hidden" id="downloadTypeId" name="downloadType" />
 								</form>
@@ -196,8 +197,13 @@
 										 <div class="col-sm-4">
 											<div class="btn-toolbar" role="toolbar">
 												<div class="btn-group custom-table-footer-button">
-													<a id="export-to-excel" onclick="$('#serviceResults').tableExport({type:'excel',escape:'false',worksheetName:'Master Report'});">
-													              <button type="button" class="btn btn-default"><img src="../images/excel.png"></button></a>
+												 <a href="javascript:downloadReports('${portalListPageNumber}', '<%=PHFIWebConstant.XLS_FILE_FORMAT%>')">
+                                                    	<button type="button" class="btn btn-default">
+                                                    		<img src="../images/excel.png">
+                                                    	</button>
+                                                    </a>
+													<!-- <a id="export-to-excel" onclick="$('#serviceResults').tableExport({type:'excel',escape:'false',worksheetName:'Master Report'});">
+													              <button type="button" class="btn btn-default"><img src="../images/excel.png"></button></a> -->
 													<!-- <a id="export-to-pdf">
 													             <button type="button" class="btn btn-default"><img src="../images/pdf.png" ></button></a> -->
 												</div>

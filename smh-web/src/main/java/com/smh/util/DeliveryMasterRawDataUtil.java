@@ -3,6 +3,7 @@
  */
 package com.smh.util;
 
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -67,15 +68,15 @@ public class DeliveryMasterRawDataUtil {
 			for(PhfiDeliveryFormRequest registrationRequest : phfiDeliveryFormRequest){
 				int i=0;
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getWid() != null) ? registrationRequest.getWid() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getWomanName() != null) ? registrationRequest.getWomanName() : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getWomanName() != null) ? URLDecoder.decode(registrationRequest.getWomanName(),"UTF-8")  : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getVisitDate()!= null) ? registrationRequest.getVisitDate() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getDeliveryDate()!= null) ? registrationRequest.getDeliveryDate() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getPregnancyLast()!= null) ? registrationRequest.getPregnancyLast() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getIsBabyAlive() != null) ? registrationRequest.getIsBabyAlive(): " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getDeliveryPlace() != null) ? registrationRequest.getDeliveryPlace() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getOtherPlace()!= null) ? registrationRequest.getOtherPlace() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getDeliveryConductedBy()!= null) ? registrationRequest.getDeliveryConductedBy() : " ") + ""));
-				s.addCell(new Label(i++, j, ""+((registrationRequest.getDeliveryType()!= null) ? registrationRequest.getDeliveryType(): " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getDeliveryPlace() != null) ? URLDecoder.decode(registrationRequest.getDeliveryPlace(),"UTF-8") : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getOtherPlace()!= null) ? URLDecoder.decode(registrationRequest.getOtherPlace(),"UTF-8") : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getDeliveryConductedBy()!= null) ? URLDecoder.decode(registrationRequest.getDeliveryConductedBy(),"UTF-8") : " ") + ""));
+				s.addCell(new Label(i++, j, ""+((registrationRequest.getDeliveryType()!= null) ? URLDecoder.decode(registrationRequest.getDeliveryType(),"UTF-8"): " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getBabyWeight()!= null) ? registrationRequest.getBabyWeight() : " ") + ""));
 				s.addCell(new Label(i++, j, ""+((registrationRequest.getIsExcessiveBleeding()!= null) ? registrationRequest.getIsExcessiveBleeding() : " ") + ""));
 				j = j+1;
