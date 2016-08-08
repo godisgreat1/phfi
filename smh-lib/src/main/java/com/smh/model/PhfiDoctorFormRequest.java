@@ -24,7 +24,7 @@ public class PhfiDoctorFormRequest extends SearchRequest{
 	private String womanName;
 	private String age;
 	private String years;
-	private String wid;
+	private Integer wid;
 	private String village;
 	private String taluk;
 	private String district;
@@ -46,6 +46,7 @@ public class PhfiDoctorFormRequest extends SearchRequest{
 	private String anmName;
 	private String nameOfAsha;
 	private Integer slNo;
+	private Integer daysToDeliver;
 	
 	/**
 	 * @return the date
@@ -131,18 +132,7 @@ public class PhfiDoctorFormRequest extends SearchRequest{
 	public void setYears(String years) {
 		this.years = years;
 	}
-	/**
-	 * @return the wid
-	 */
-	public String getWid() {
-		return wid;
-	}
-	/**
-	 * @param wid the wid to set
-	 */
-	public void setWid(String wid) {
-		this.wid = wid;
-	}
+	
 	/**
 	 * @return the village
 	 */
@@ -364,6 +354,18 @@ public class PhfiDoctorFormRequest extends SearchRequest{
 	}
 	public void setSlNo(Integer slNo) {
 		this.slNo = slNo;
+	}
+	public Integer getWid() {
+		return wid;
+	}
+	public void setWid(Integer wid) {
+		this.wid = wid;
+	}
+	public Integer getDaysToDeliver() {
+		return daysToDeliver;
+	}
+	public void setDaysToDeliver(Integer daysToDeliver) {
+		this.daysToDeliver = daysToDeliver;
 	}
 	
 	

@@ -93,12 +93,12 @@ td {
 									<tr style="height: 45px;">
 										<td colspan="1">&nbsp;&nbsp;Name :<div class="womanName">${medicalCaseSheet.name}</div></td>
 										<td colspan="1">&nbsp;&nbsp;Age  :${medicalCaseSheet.age}</td>
-										<td colspan="1">&nbsp;&nbsp;Years:${medicalCaseSheet.years}</td>
+										<%-- <td colspan="1">&nbsp;&nbsp;Years:${medicalCaseSheet.years}</td> --%>
 										<td colspan="1">&nbsp;&nbsp;WID  :${medicalCaseSheet.wid}</td>
 									</tr>
 									<tr style="height: 45px;">
 										<td colspan="1">&nbsp;&nbsp;Village :<div class="villageName">${medicalCaseSheet.villageName}</div></td>
-										<td colspan="1">&nbsp;&nbsp;Takul :<div class="taluk">${medicalCaseSheet.takul}</div></td>
+										<td colspan="1">&nbsp;&nbsp;Taluk :<div class="taluk">${medicalCaseSheet.takul}</div></td>
 										<td colspan="2">&nbsp;&nbsp;District :<div class="district">${medicalCaseSheet.distric}</div></td>
 									</tr>
 									<tr style="height: 45px;">

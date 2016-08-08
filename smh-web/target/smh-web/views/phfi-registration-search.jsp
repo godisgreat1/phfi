@@ -4,6 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.smh.constants.Constant"%>
 <%@page import="com.smh.constants.JspConstants"%>
+<%@page import="com.smh.constants.PHFIWebConstant"%>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
@@ -63,7 +65,7 @@
 								<form action="show-medical-case-sheet" name="viewCaseSheet" method="GET">
 									<input type="hidden" name="uuid" id="uuid" />
 								</form>
-								<form action="getBeaconReport" name="downloadReport" method="post">
+								<form action="downloadRegistrationReport" name="downloadReport" method="post">
 									<input type="hidden" id="downloadPageNumberId" name="downLoadPageNumber" /> 
 									<input type="hidden" id="downloadTypeId" name="downloadType" />
 								</form>
@@ -166,10 +168,21 @@
 										 <div class="col-sm-4">
 											<div class="btn-toolbar" role="toolbar">
 												<div class="btn-group custom-table-footer-button">
-													<a id="export-to-excel" onclick="$('#serviceResults').tableExport({type:'excel',escape:'false',ignoreColumn:'[8]',worksheetName:'Women Report'});">
+													<!-- <a id="export-to-excel" onclick="$('#serviceResults').tableExport({type:'excel',escape:'false',ignoreColumn:'[8]',worksheetName:'Women Report'});">
 													              <button type="button" class="btn btn-default"><img src="../images/excel.png"></button></a>
 													<a id="export-to-pdf" >
-													             <button type="button" class="btn btn-default"><img src="../images/pdf.png" ></button></a>
+													             <button type="button" class="btn btn-default"><img src="../images/pdf.png" ></button></a> -->
+													    <a href="javascript:downloadReports('${portalListPageNumber}', '<%=PHFIWebConstant.XLS_FILE_FORMAT%>')">
+                                                    	<button type="button" class="btn btn-default">
+                                                    		<img src="../images/excel.png">
+                                                    	</button>
+                                                    </a>
+                                                    <%-- 
+                                                     <a href="javascript:downloadReports('${portalListPageNumber}','<%=PHFIWebConstant.PDF_FILE_FORMAT%>')">
+														<button type="button" class="btn btn-default">
+															<img src="../images/pdf.png"/>
+														</button>
+													</a>  --%>
 												</div>
 											</div>
 										</div> 

@@ -417,7 +417,7 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<form:radiobutton id="haveCough" path="haveCough"
-															value="Yes" onclick="showCough()"/><spring:message code="com.phfi.yes" />Yes&nbsp; <form:radiobutton
+															value="Yes" onclick="showCough()"/><spring:message code="com.phfi.yes" /> &nbsp; <form:radiobutton
 															id="haveCough" path="haveCough" value="No" onclick="hideCough()" onblur="validateRadio()"/>&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="haveCoughErrorDiv" class="red-error">&nbsp;</span>
@@ -445,7 +445,7 @@
 													<fieldset class="col-sm-3">
 														<form:radiobutton id="isAbdominalPain" path="isAbdominalPain"
 															value="Yes" onclick="showAbnormalPain()"/><spring:message code="com.phfi.yes" />&nbsp; <form:radiobutton
-															id="isAbdominalPain" path="isAbdominalPain" value="No" onclick="hideAbnormalPain()" onblur="validateRadio()"/>&nbsp;&nbsp;<spring:message code="com.phfi.yes" />
+															id="isAbdominalPain" path="isAbdominalPain" value="No" onclick="hideAbnormalPain()" onblur="validateRadio()"/>&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isAbdominalPainErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -592,7 +592,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" onclick="return resetContact()"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -922,7 +922,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" > <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -1125,7 +1125,7 @@
 													</fieldset>
 												</fieldset>
 												<fieldset class="col-sm-12" id="ultrasoundId">
-														<fieldset class="col-sm-3">
+														<%-- <fieldset class="col-sm-3">
 															<label><spring:message code="com.phfi.aUltrasoundScan" /><span class="required-field">*</span></label>
 															<form:input cssClass="form-control" path="firstUltrasound"
 																id="firstUltrasound" maxlength="50"
@@ -1133,7 +1133,7 @@
 															<div class="discriptionErrorMsg">
 																<span id="firstUltrasoundErrorDiv" class="red-error">&nbsp;</span>
 															</div>
-														</fieldset>
+														</fieldset> --%>
 														<fieldset class="col-sm-3">
 															<label><spring:message code="com.phfi.date" /><span class="required-field">*</span></label>
 															<div class="input-group registrationdate">
@@ -1147,7 +1147,7 @@
 																<span id="ultrasoundDateOneErrorDiv" class="red-error">&nbsp;</span>
 															</div>
 														</fieldset>
-														<fieldset class="col-sm-3">
+														<%-- <fieldset class="col-sm-3">
 															<label><spring:message code="com.phfi.bUltrasoundScan" /><span class="required-field">*</span></label>
 															<form:input cssClass="form-control" path="secUltrasound"
 																id="secUltrasound" maxlength="50"
@@ -1155,7 +1155,7 @@
 															<div class="discriptionErrorMsg">
 																<span id="secUltrasoundErrorDiv" class="red-error">&nbsp;</span>
 															</div>
-														</fieldset>
+														</fieldset> --%>
 														<fieldset class="col-sm-3">
 															<label><spring:message code="com.phfi.date" /><span class="required-field">*</span></label>
 															<div class="input-group registrationdate">
@@ -1182,7 +1182,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" onclick="return resetObstetric()"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -1362,7 +1362,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -1380,7 +1380,7 @@
 													<fieldset class="col-sm-3">
 														<form:radiobutton id="talkingIrrelevantly" path="talkingIrrelevantly"
 															value="Yes"/><spring:message code="com.phfi.yes" />&nbsp; <form:radiobutton
-															id="talkingIrrelevantly" path="talkingIrrelevantly" value="0" onblur="validateRadio()"/>&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="talkingIrrelevantly" path="talkingIrrelevantly" value="No" onblur="validateRadio()"/>&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="talkingIrrelevantlyErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -1397,7 +1397,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" onclick="return resetOther()"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -1964,10 +1964,10 @@ $(document).ready(function() {
 		$(".confirm-info-list,.askthefamily-next")
 				.click(
 						function() {
-							/*  if (!setAshaInfo()|!setAskTheWoman()|!setObserve()|!setTestResult()|!setAskTheFamily()) {
+							  if (!setAshaInfo()|!setAskTheWoman()|!setObserve()|!setTestResult()|!setAskTheFamily()) {
 							return false;
 						} 
-							 */
+							 
 							$(".confirm-circle-tab").addClass("active-circle");
 							$(
 									".womenInfo-circle-tab,.askTheWomen-circle-tab,.askTheWomenRest-circle-tab,.observe-circle-tab,.testResultFirst-circle-tab,.testResultSec-circle-tab,.testResultThird-circle-tab,.askTheFamily-circle-tab")
@@ -1982,6 +1982,11 @@ $(document).ready(function() {
 									.hide();
 						});
 });
+
+function cancel(){
+	document.location.href='show-phfi-visit-form';
+}
+
 	</script>
 </body>
 </html>

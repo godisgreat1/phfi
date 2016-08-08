@@ -556,7 +556,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" onclick="return resetContact()"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -573,8 +573,114 @@
 														<fieldset class="col-sm-4 otherPlace">
 															<label class="control-label"><spring:message code="com.phfi.age" /><span
 																class="required-field">*</span></label>
-															<form:input cssClass="form-control" path="age" id="age"
-																onblur="validateAge(this)" />
+															 <form:input cssClass="form-control" path="age" id="age"
+																onblur="validateAge(this)" /> 
+																
+														<%-- 	<form:select path="age" id="age"
+																onchange="validateAge(this)"
+																cssClass="form-control">
+																<form:option value="">.:Please Select:.</form:option>
+																<form:option value="101">101</form:option>
+																<form:option value="102">102</form:option>
+																<form:option value="103">103</form:option>
+																<form:option value="104">104</form:option>
+																<form:option value="105">105</form:option>
+																<form:option value="106">101</form:option>
+																<form:option value="107">102</form:option>
+																<form:option value="108">103</form:option>
+																<form:option value="109">104</form:option>
+																<form:option value="110">105</form:option>
+																<form:option value="111">101</form:option>
+																<form:option value="112">102</form:option>
+																<form:option value="113">103</form:option>
+																<form:option value="114">104</form:option>
+																<form:option value="115">105</form:option>
+																<form:option value="116">101</form:option>
+																<form:option value="117">102</form:option>
+																<form:option value="118">103</form:option>
+																<form:option value="119">104</form:option>
+																<form:option value="120">105</form:option>
+																<form:option value="121">101</form:option>
+																<form:option value="122">102</form:option>
+																<form:option value="123">103</form:option>
+																<form:option value="124">104</form:option>
+																<form:option value="125">105</form:option>
+																<form:option value="126">101</form:option>
+																<form:option value="127">102</form:option>
+																<form:option value="128">103</form:option>
+																<form:option value="129">104</form:option>
+																<form:option value="130">105</form:option>
+																<form:option value="131">101</form:option>
+																<form:option value="132">102</form:option>
+																<form:option value="133">103</form:option>
+																<form:option value="134">104</form:option>
+																<form:option value="135">105</form:option>
+																<form:option value="136">101</form:option>
+																<form:option value="137">102</form:option>
+																<form:option value="138">103</form:option>
+																<form:option value="139">104</form:option>
+																<form:option value="140">105</form:option>
+																<form:option value="141">101</form:option>
+																<form:option value="142">102</form:option>
+																<form:option value="143">103</form:option>
+																<form:option value="144">104</form:option>
+																<form:option value="145">105</form:option>
+																<form:option value="146">101</form:option>
+																<form:option value="147">102</form:option>
+																<form:option value="148">103</form:option>
+																<form:option value="149">104</form:option>
+																<form:option value="150">105</form:option>
+																<form:option value="151">101</form:option>
+																<form:option value="152">102</form:option>
+																<form:option value="153">103</form:option>
+																<form:option value="154">104</form:option>
+																<form:option value="155">105</form:option>
+																<form:option value="156">101</form:option>
+																<form:option value="157">102</form:option>
+																<form:option value="158">103</form:option>
+																<form:option value="159">104</form:option>
+																<form:option value="160">105</form:option>
+																<form:option value="161">101</form:option>
+																<form:option value="162">102</form:option>
+																<form:option value="163">103</form:option>
+																<form:option value="164">104</form:option>
+																<form:option value="165">105</form:option>
+																<form:option value="166">101</form:option>
+																<form:option value="167">102</form:option>
+																<form:option value="168">103</form:option>
+																<form:option value="169">104</form:option>
+																<form:option value="170">105</form:option>
+																<form:option value="171">101</form:option>
+																<form:option value="172">102</form:option>
+																<form:option value="173">103</form:option>
+																<form:option value="174">104</form:option>
+																<form:option value="175">105</form:option>
+																<form:option value="176">101</form:option>
+																<form:option value="177">102</form:option>
+																<form:option value="178">103</form:option>
+																<form:option value="179">104</form:option>
+																<form:option value="180">105</form:option>
+																<form:option value="181">101</form:option>
+																<form:option value="182">102</form:option>
+																<form:option value="183">103</form:option>
+																<form:option value="184">104</form:option>
+																<form:option value="185">105</form:option>
+																<form:option value="186">101</form:option>
+																<form:option value="187">102</form:option>
+																<form:option value="188">103</form:option>
+																<form:option value="189">104</form:option>
+																<form:option value="190">105</form:option>
+																<form:option value="191">101</form:option>
+																<form:option value="192">102</form:option>
+																<form:option value="193">103</form:option>
+																<form:option value="194">104</form:option>
+																<form:option value="195">105</form:option>
+																<form:option value="196">101</form:option>
+																<form:option value="197">102</form:option>
+																<form:option value="198">103</form:option>
+																<form:option value="199">104</form:option>
+															</form:select>	
+																 --%>
 															<div class="discriptionErrorMsg">
 																<span id="ageErrorDiv" class="red-error">&nbsp;</span>
 															</div>
@@ -639,7 +745,7 @@
 																<form:option value="SC"><spring:message code="com.phfi.sc" /></form:option>
 																<form:option value="ST"><spring:message code="com.phfi.st" /></form:option>
 																<form:option value="OBC"><spring:message code="com.phfi.obc" /></form:option>
-																<form:option value="ST"><spring:message code="com.phfi.general" /></form:option>
+																<form:option value="GENERAL"><spring:message code="com.phfi.general" /></form:option>
 																<form:option value="other"><spring:message code="com.phfi.other" /></form:option>
 															</form:select>
 															<div class="discriptionErrorMsg">
@@ -792,7 +898,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" > <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -807,9 +913,30 @@
 														</label>
 													</fieldset>
 													<fieldset class="col-sm-3">
-														<form:input cssClass="form-control-obstric"
+														<%-- <form:input cssClass="form-control-obstric"
 															path="pregnancyCount" id="pregnancyCount"
-															onblur="regnancyCount();" />
+															onblur="regnancyCount();" /> --%>
+															
+														<form:select path="pregnancyCount" id="pregnancyCount"
+															onblur="pregnancyCount();"
+															cssClass="form-control">
+															<form:option value="">.:Please Select:.</form:option>
+															<form:option value="1">1</form:option>
+															<form:option value="2">2</form:option>
+															<form:option value="3">3</form:option>
+															<form:option value="4">4</form:option>
+															<form:option value="5">5</form:option>
+															<form:option value="6">6</form:option>
+															<form:option value="7">7</form:option>
+															<form:option value="8">8</form:option>
+															<form:option value="9">9</form:option>
+															<form:option value="10">10</form:option>
+															<form:option value="11">11</form:option>
+															<form:option value="12">12</form:option>
+															<form:option value="13">13</form:option>
+															<form:option value="14">14</form:option>
+															<form:option value="15">15</form:option>
+														</form:select>
 														<div class="discriptionErrorMsg">
 															<span id="pregnancyCountErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -937,7 +1064,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" onclick="return resetObstetric()"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -952,7 +1079,7 @@
 														<label><spring:message code="com.phfi.lmp" /><span class="required-field">*</span></label>
 														<div class="input-group lmpdate">
 															<form:input cssClass="form-control lmp" path="lmp"
-																id="lmp" onclick="return clientValidation('lmp', 'required','lmpErrorDiv')"/>
+																id="lmp" />
 															<span class="input-group-addon"><span
 																class="glyphicon glyphicon-calendar"></span></span>
 														</div>
@@ -964,8 +1091,7 @@
 														<label><spring:message code="com.phfi.height" /><span class="required-field">*</span>
 														</label>
 														<form:input cssClass="form-control" path="height"
-															id="height"
-															onblur="openPopup(this)" />
+															id="height"/>
 														<div class="discriptionErrorMsg">
 															<span id="heightErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -973,23 +1099,20 @@
 													<fieldset class="col-sm-4">
 														<label><spring:message code="com.phfi.bloodGroup" /><span class="required-field">*</span>
 														</label>
-														<form:select path="bloodgroup" id="bloodgroup"
-															onblur="return clientValidation('bloodgroup', 'dropdownField','bloodgroupErrorDiv');"
-															cssClass="form-control">
+														<form:select path="bloodgroup" id="bloodgroup"	cssClass="form-control">
 															<form:option value="">.:Please Select:.</form:option>
-															<form:option value="A+"><spring:message code="com.phfi.a+" />
-															</form:option>
+															<form:option value="A"><spring:message code="com.phfi.a+" /></form:option>
 															<form:option value="A-"><spring:message code="com.phfi.a-" />
 															</form:option>
-															<form:option value="B+"><spring:message code="com.phfi.b+" />
+															<form:option value="B"><spring:message code="com.phfi.b+" />
 															</form:option>
 															<form:option value="B-"><spring:message code="com.phfi.b-" />
 															</form:option>
-															<form:option value="O+"><spring:message code="com.phfi.o+" />
+															<form:option value="O"><spring:message code="com.phfi.o+" />
 															</form:option>
 															<form:option value="O-"><spring:message code="com.phfi.o-" />
 															</form:option>
-															<form:option value="AB+"><spring:message code="com.phfi.ab+" />
+															<form:option value="AB"><spring:message code="com.phfi.ab+" />
 															</form:option>
 															<form:option value="AB-"><spring:message code="com.phfi.ab-" />
 															</form:option>
@@ -1075,7 +1198,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" onclick="return resetOther()"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -1658,15 +1781,13 @@
 							$('#problemDesc').val(encodeURIComponent($('#problemDesc').val()));
 							$('#pregnancyCount').val(encodeURIComponent($('#pregnancyCount').val()));
 							$('#noOfChildren').val(encodeURIComponent($('#noOfChildren').val()));
-							$('#dateOfRecentDelivery').val(encodeURIComponent($('#dateOfRecentDelivery').val()));
 							$('#earlyDelivery').val(encodeURIComponent($('#earlyDelivery').val()));
 							$('#caesarean').val(encodeURIComponent($('#caesarean').val()));
 							$('#breathlessness').val(encodeURIComponent($('#breathlessness').val()));
 							$('#severepallor').val(encodeURIComponent($('#severepallor').val()));
-							$('3bleedexcessively').val(encodeURIComponent($('#bleedexcessively').val()));
+							$('#bleedexcessively').val(encodeURIComponent($('#bleedexcessively').val()));
 							$('#height').val(encodeURIComponent($('#height').val()));
 							$('#bloodgroup').val(encodeURIComponent($('#bloodgroup').val()));
-							$('#uid').val(encodeURIComponent($('#uid').val()));
 							$('#villageName').val(encodeURIComponent($('#villageName').val()));
 							$('#phc').val(encodeURIComponent($('#phc').val()));
 							$('#ashaName').val(encodeURIComponent($('#ashaName').val()));
@@ -1678,12 +1799,12 @@
 							
 							
 							
-							/* if (!validatePreliminary()|!validateContact()|!validatePersonal()) {
+							 if (!validateConfirm()) {
 								return false;
-							} */ 
-							if(!setPastHistory()|!validateObstetric()|!validateOther()){
+							}  
+							/* if(!setPastHistory()|!validateObstetric()|!validateOther()){
 								return false;
-							}
+							} */
 							$(".confirm-circle-tab").addClass("active-circle");
 							$(
 									".preliminary-circle-tab,.contact-circle-tab,.personal-circle-tab,.pasthistory-circle-tab,.obstetric-circle-tab,.otherinformation-circle-tab")
@@ -1746,6 +1867,10 @@
 		$('#' + $($this).closest('div').attr('id')).addClass('opened');
 		$('#' + $($this).closest('div').attr('id')).popup("hide");
 		
+	}
+	
+	function cancel(){
+		document.location.href='show-phfi-registration-form';
 	}
 	
 	</script>

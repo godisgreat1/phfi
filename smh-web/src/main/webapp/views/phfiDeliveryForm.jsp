@@ -519,6 +519,11 @@ $(document).ready(function() {
 					$(".confirm-details-content").show();
 					$(".women-info-content,.delivery-info-content").hide();
 				});
+		
+		
+		function cancel(){
+			document.location.href='show-phfi-delivery-visit-form';
+		}
 	</script>
 </body>
 </html>

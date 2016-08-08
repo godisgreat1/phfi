@@ -102,7 +102,12 @@
 												</fieldset>	
 												<fieldset class="col-sm-4"> 
 													<label class="control-label" for="">Assestment Status</label>
-													<form:input path="clinicalStatus" title="Assestment Status" id="clinicalStatus" cssClass="form-control"/>
+														<form:select path="clinicalStatus" id="clinicalStatus"	cssClass="form-control">
+															<form:option value="">.:Please Select:.</form:option>
+															<form:option value="High Risk">High Risk</form:option>
+															<form:option value="Risk">Risk</form:option>
+															<form:option value="No abnormality detected">No abnormality detected</form:option>
+														</form:select>
 													<div class="discriptionErrorMsg">
 														<span id="clinicalStatusErr" class="red-error">&nbsp;</span>
 													</div> 

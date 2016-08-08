@@ -59,7 +59,7 @@
 					<input type="hidden" id="pageNumberId" name="pageNumber" />
 					<input type="hidden" id="totalRecordsId" name="totalRecords"/>
 				</form>
-				<form action="downloadRoleReport" name="downloadReport" method="post">
+				<form action="downloadRegistrationReport" name="downloadReport" method="post">
 				      <input type="hidden" id="downloadPageNumberId" name="downLoadPageNumber" />
 				      <input type="hidden" id="downloadTypeId" name="downloadType" />
 			        </form>

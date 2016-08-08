@@ -249,5 +249,8 @@ public interface URLMappingConstants {
 	
 	public static final String DOWNLOAD_ASHA_FEEDBACK_REPORT = "getAshaFeedbackReport";
 	
+	public static final String GET_DOCTOR_FORM_REPORT = "getDoctorFormReport";
+	
+	
 	
 }

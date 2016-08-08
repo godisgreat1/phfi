@@ -106,32 +106,32 @@ function setAshaInfo(){
 }
 
 function setAskTheWoman(){
-	setLable('confirmHaveFeer', get('haveFever').value.trim());
-	setLable('confirmHadFit', get('isFits').value.trim());
-	setLable('confirmLostConsciousness', get('isConsciousness').value.trim());
+	setLable('confirmHaveFeer', $('input[name=haveFever]:checked').val());
+	setLable('confirmHadFit',$('input[name=isFits]:checked').val());
+	setLable('confirmLostConsciousness',$('input[name=isConsciousness]:checked').val());
 	/*setLable('confirmFeltGiddy', get('feltGiddy').value.trim());*/
-	setLable('confirmHaveHeadaches', get('haveHeadaches').value.trim());
-	setLable('confirmBlurreVission', get('haveBlurredVision').value.trim());
-	setLable('confirmBreathless', get('isBreathless').value.trim());
-	setLable('confirmHaveCough', get('haveCough').value.trim());
-	setLable('confirmAbdominalPain', get('isAbdominalPain').value.trim());
+	setLable('confirmHaveHeadaches',$('input[name=haveHeadaches]:checked').val());
+	setLable('confirmBlurreVission',$('input[name=haveBlurredVision]:checked').val());
+	setLable('confirmBreathless', $('input[name=isBreathless]:checked').val());
+	setLable('confirmHaveCough', $('input[name=haveCough]:checked').val());
+	setLable('confirmAbdominalPain',$('input[name=isAbdominalPain]:checked').val());
 	/*setLable('confirmBlurreVission', get('babyMove').value.trim());*/
-	setLable('confirmVaginalDischarge', get('isVaginalDischarge').value.trim());
-	setLable('confirmAnyBleeding', get('isBleeding').value.trim());
+	setLable('confirmVaginalDischarge',$('input[name=isVaginalDischarge]:checked').val());
+	setLable('confirmAnyBleeding', $('input[name=isBleeding]:checked').val());
 	/*setLable('confirmHaveWaterBroken', get('isWaterBroken').value.trim());*/
-	setLable('confirmBurningPain', get('isBurningPain').value.trim());
+	setLable('confirmBurningPain',$('input[name=isBurningPain]:checked').val());
 	/*setLable('confirmRingTighter', get('toeRingsTighter').value.trim());*/
 	/*setLable('confirmWearBangles', get('isBangles').value.trim());*/
 	return true;
 }
 
 function setObserve(){
-	setLable('confirmOutOFBreath', get('outOfBreath').value.trim());
-	setLable('confirmTakingIrrelevantly', get('isTalking').value.trim());
-	setLable('confirmUpperEye', get('upperEyeColor').value.trim());
-	setLable('confirmLowerEye', get('lowerEyeColor').value.trim());
-	setLable('confirmHisFeet', get('isAnkleDepression').value.trim());
-	setLable('confirmFace', get('isEyeSwelling').value.trim());
+	setLable('confirmOutOFBreath', $('input[name=outOfBreath]:checked').val());
+	setLable('confirmTakingIrrelevantly',$('input[name=isTalking]:checked').val());
+	setLable('confirmUpperEye', $('input[name=upperEyeColor]:checked').val());
+	setLable('confirmLowerEye', $('input[name=lowerEyeColor]:checked').val());
+	setLable('confirmHisFeet',$('input[name=isAnkleDepression]:checked').val());
+	setLable('confirmFace',$('input[name=isEyeSwelling]:checked').val());
 	return true;
 }
 
@@ -146,7 +146,7 @@ function setTestResult(){
 	setLable('confirmFourthWeight', get('fourthWeight').value.trim());
 	setLable('confirmFourthWeightDate', get('weightDateFour').value.trim());*/
 	
-	setLable('confirmBpStatus', get('bp').value.trim());
+	setLable('confirmBpStatus',$('input[name=bp]:checked').val());
 	setLable('confirmFirstBp', get('firstBp').value.trim());
 	setLable('confirmFirstBpDate', get('bpDateOne').value.trim());
 	setLable('confirmSecBp', get('secBp').value.trim());
@@ -156,7 +156,7 @@ function setTestResult(){
 	setLable('confirmFourthBp', get('fourBp').value.trim());
 	setLable('confirmFourthBpDate', get('bpDateFour').value.trim());*/
 	
-	setLable('confirmHbStatus', get('hb').value.trim());
+	setLable('confirmHbStatus',$('input[name=hb]:checked').val());
 	setLable('confirmFirstHb', get('firstHb').value.trim());
 	setLable('confirmFirstHbDate', get('hbDateOne').value.trim());
 	setLable('confirmSecHb', get('secHb').value.trim());
@@ -166,7 +166,7 @@ function setTestResult(){
 	setLable('confirmFourthHb', get('fourHb').value.trim());
 	setLable('confirmFourthHbDate', get('hbDateFour').value.trim());*/
 	
-	setLable('confirmUaStatus', get('urine').value.trim());
+	setLable('confirmUaStatus', $('input[name=urine]:checked').val());
 	setLable('confirmFirstUa', get('firstUrine').value.trim());
 	setLable('confirmFirstUaDate', get('urineDateOne').value.trim());
 	setLable('confirmSecUa', get('secUrine').value.trim());
@@ -191,22 +191,46 @@ function setTestResult(){
 	setLable('confirmSecRbs', get('secRbs').value.trim());
 	setLable('confirmSecRbsDate', get('rbsDateSec').value.trim());*/
 	
-	setLable('confirmMalariaStatus', get('malaria').value.trim());
+	setLable('confirmMalariaStatus',$('input[name=malaria]:checked').val());
 	setLable('confirmFirstMalaria', get('firstMalaria').value.trim());
 	setLable('confirmFirstMalariaDate', get('malariaDateOne').value.trim());
 	setLable('confirmSecMalaria', get('secMalaria').value.trim());
 	setLable('confirmSecMalariaDate', get('malariaDateSec').value.trim());
 	
-	setLable('confirmSputumStatus', get('sputum').value.trim());
+	setLable('confirmSputumStatus',$('input[name=sputum]:checked').val());
 	setLable('confirmFirstSputum', get('sputumTest').value.trim());
 	setLable('confirmFirstSputumDate', get('sputumDate').value.trim());
 	return true;
 }
 function setAskTheFamily(){
-	setLable('confirmTalkingAndDisconnected', get('talkingIrrelevantly').value.trim());
-	setLable('confirmCaringBaby', get('carringBabyAndHerself').value.trim());
-	setLable('confirmImaginaryVoiceAndPeople', get('isHearingImaginary').value.trim());
+	setLable('confirmTalkingAndDisconnected',$('input[name=talkingIrrelevantly]:checked').val());
+	setLable('confirmCaringBaby', $('input[name=carringBabyAndHerself]:checked').val());
+	setLable('confirmImaginaryVoiceAndPeople',$('input[name=isHearingImaginary]:checked').val());
 	return true;
+}
+
+function fetchWomenNameByID(){
+	var wid = get("wid").value;
+	
+	if(wid == ""){
+		return;
+	}
+	doAjaxFetchWomenNameByID(wid);
+}
+function doAjaxFetchWomenNameByID(wid){
+	$.ajax({
+		type : "GET",
+		url : "doAjaxFetchWomenNameByID?wid=" + wid,
+		async : true,
+		success : function(response) {
+			var obj = JSON.parse(response);
+			document.getElementById("womanName").value = obj;
+		},
+		error : function(e) {
+			
+		}
+		
+	});
 }
 
 

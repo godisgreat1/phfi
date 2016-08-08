@@ -23,8 +23,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.smh.constants.Constant;
 import com.smh.constants.URLMappingConstants;
+import com.smh.model.DoctorReportResponse;
 import com.smh.model.MedicalCaseSheetDTO;
 import com.smh.model.PhfiDeliveryFormResponse;
+import com.smh.model.PhfiDoctorFormRequest;
 import com.smh.model.PhfiPostPartumVisitResponse;
 import com.smh.model.PhfiRegistrationResponse;
 import com.smh.model.PhfiVisitResponse;
@@ -377,5 +379,38 @@ public class ReportController extends BaseController implements URLMappingConsta
 			logger.info("Exiting :: ReportController ::getMasterReport method ");
 			return modelAndView;
 		}
+	 	
+	 	@RequestMapping(value = GET_DOCTOR_FORM_REPORT, method = RequestMethod.GET)
+		public ModelAndView getDoctorFormReport(HttpServletRequest request,
+											HttpServletResponse response, 
+											Map model, HttpSession session,
+											PhfiDoctorFormRequest phfiDoctorFormRequest) {
+			ModelAndView modelAndView = new ModelAndView(SHOW_DOCTOR_REPORT);
+			logger.info("Entering :: ReportController ::getDoctorFormReport method ");
+			try {
+				phfiDoctorFormRequest.setPageIndex(Constant.ONE);
+				phfiDoctorFormRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
+				DoctorReportResponse doctorReportResponse = reportService.getDoctorReport(phfiDoctorFormRequest);
+				if (Constant.SUCCESS.equalsIgnoreCase(doctorReportResponse.getResponseMessage())) {
+					List<PhfiDoctorFormRequest> masterReport = doctorReportResponse.getDoctorReportRequest();
+					model.put("totalCount", doctorReportResponse.getNoOfRecords());
+					modelAndView.addObject("resultflag", true);
+					modelAndView = PaginationUtil.getPagenationModel(modelAndView, doctorReportResponse.getNoOfRecords());
+					model.put("doctorReportList", masterReport);
+				} else {
+					modelAndView.addObject("resultflag", true);
+					model.put("doctorReportList", new ArrayList());
+				}
+				model.put("phfiDoctorFormRequest", phfiDoctorFormRequest);				
+				
+			} catch (Exception e) {
+				logger.error("Error :: ReportController ::getDoctorFormReport method ", e);
+				modelAndView.setViewName(INVALID_PAGE);
+			}
+			logger.info("Exiting :: ReportController ::getDoctorFormReport method ");
+			return modelAndView;
+		}
+	 	
+	 	
 	 	
 }

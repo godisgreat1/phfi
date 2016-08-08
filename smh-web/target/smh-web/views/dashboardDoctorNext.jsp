@@ -33,6 +33,12 @@
 			<!--Article Block Start-->
 			<article>
 				<div class="col-xs-12 content-wrapper">
+				<div class="col-xs-12">
+						<div class="discriptionErrorMsg">
+							<span class="green-error" id="sucessDiv">${success}</span>
+							<span class="red-error" id="errorDiv">${error}</span>
+						</div>
+					</div>
 					<!-- <h3>Dash Board (Static)</h3> 
 					Content Block Start
 						<img src="../images/dashboard.png" width="100%" height="400px">
@@ -41,8 +47,8 @@
 						<tr>
 							<td class="buttonMain" height="300px" valign="middle"><p style="margin-top: 100px;margin-left: 50px">
 							<input type="submit" id="buttonCreate" class="button"  value="Doctor Form" style="height: 25px;" onclick="document.location.href='show-doctor-form';">
-							<input type="submit" id="buttonCreate" class="button"  value="Ratify" style="height: 25px" onclick="document.location.href='get-doctor-report';">
-							<input type="submit" id="buttonCreate" class="button"  value="Add Medical Details" style="height: 25px;" onclick="return submitData()">
+							<!-- <input type="submit" id="buttonCreate" class="button"  value="Ratify" style="height: 25px" onclick="document.location.href='get-doctor-report';">
+							<input type="submit" id="buttonCreate" class="button"  value="Add Medical Details" style="height: 25px;" onclick="return submitData()"> -->
 							<input type="submit" id="buttonCreate" class="button"  value="Back" style="height: 25px;" onclick="document.location.href='dashboard-sec-page';"></p></td>
 						</tr>
 					</table>

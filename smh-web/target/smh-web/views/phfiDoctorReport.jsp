@@ -67,11 +67,11 @@
 								</form>
 								<!--Success and Failure Message End-->
 								<!-- Page Form Start -->
-								<form:form action="get-doctor-report" commandName="phfiDoctorFormRequest" method="GET">
+								<form:form action="getDoctorFormReport" commandName="phfiDoctorFormRequest" method="GET">
 									<div class="col-sm-12">
 										<div class="row">
 											<div class="field-element-row">
-												<fieldset class="col-sm-4"> 
+												<%-- <fieldset class="col-sm-4"> 
 													<label class="control-label" for="">From Date</label>
 													<div class="input-group testdate">
 															<form:input cssClass="form-control testDate" path="fromDate" id="fromDate" />
@@ -88,7 +88,7 @@
 																<span class="glyphicon glyphicon-calendar"></span>
 															</span>	
 													</div>
-												</fieldset>											
+												</fieldset> --%>											
 												<fieldset class="col-sm-4"> 
 													<label class="control-label" for="">WID</label>
 													<form:input path="wid" title="WID" id="wid" cssClass="form-control"/> 
@@ -142,33 +142,37 @@
 								<thead>
 							 <tr>
 								<th>SL NO.</th>
-								<th>WID</th>
-								<th>Women Name</th>
-								<th>History</th>
-								<th>Lab Tests</th>
-								<th>Doctor's Diagnosis</th>
-								<th>Doctor's Assessment Status</th>
-								<th>Advice</th>
+								<th>Women<br/> Name</th>
+								<th width="5%">Age</th>
+								<th width="5%">WID</th>
+								<th>Days to<br/> Deliver</th>
+								<th>Obstetric<br/> score</th>
+								<th>Name of<br/> ASHA</th>
+								<th>Doctor's <br/>assessment</th>
+								<th>Doctor's <br/>assessment <br/>status</th>
 								<th>Investigations</th>
 								<th>Medication</th>
-								<th>Health Education</th>
+								<th>Iinstructions<br/> to ANM</th>
+								<th>Woman next<br/> visit to<br/> Doctor </th>
 							</tr>
 							</thead>
 								<c:choose>
 									<c:when test="${!(fn:length(doctorReportList) eq 0)}">
 										<c:forEach items="${doctorReportList}" var="doctorData">
 											<tr>	
-												<td data-title="SL NO."><div>${doctorData.slNo}</div></td>							
-												<td data-title="WID">${doctorData.wid}</td>
+												<td data-title="SL NO."><div>${doctorData.slNo}</div></td>
 												<td data-title="Woman Name"><div class="tableAllign womanName">${doctorData.womanName}</div></td>
-												<td data-title="History">${doctorData.history}</td>
-												<td data-title="Lab Tests">${doctorData.labtest}</td>
-												<td data-title="Doctor's Diagnosis">${doctorData.diagonosis}</td>
-												<td data-title="Doctor's Assessment Status">${doctorData.assesmentstatus}</td>
-												<td data-title="Advice">${doctorData.advice}</td>
+												<td data-title="WID">${doctorData.age}</td>							
+												<td data-title="WID">${doctorData.wid}</td>
+												<td data-title="History">${doctorData.daysToDeliver}</td>
+												<td data-title="Lab Tests">${doctorData.obstic}</td>
+												<td data-title="Name of Asha"><div class="womanName">${doctorData.nameOfAsha}</div></td>
+												<td data-title="Doctor's Diagnosis"><div class="tableAllign">${doctorData.diagonosis}</div></td>
+												<td data-title="Doctor's Assessment Status"><div class="tableAllign">${doctorData.assesmentstatus}</div></td>
 												<td data-title="Investigations"><div class="tableAllign">${doctorData.investigations}</div></td>
 												<td data-title="Medication"><div class="tableAllign">${doctorData.medication}</div></td>
 												<td data-title="Health Education"><div class="healthEducation">${doctorData.health}</div></td>
+												<td data-title="Advice">${doctorData.advice}</td>
 											</tr>
 										</c:forEach>
 									</c:when>
@@ -244,30 +248,7 @@
 		</div>
 		<!--Container block End -->
 	</div>
-	<div id="beaconActivatePopDiv" class="locatioin-list-popup">
-		<span class="glyphicon glyphicon-remove"
-			onclick="closePopup();clearPopupDesc();"></span>
-		<h2>Change Status</h2>
-		 <form action="change-beacon-status" name ="statusBeaconForm" method="post">
-			<input type="hidden" id="id" name="id" /> 
-			<input type="hidden" id="status" name="status" /> 
-			<label><span class="requiredFiled">*</span> Reason </label>
-			<textarea id="reason" name="reason" maxlength="<%= JspConstants.REASON.toString() %>"
-				onkeyup="checkMaxLength(this);clientValidation('reason', 'reason','popDescError_div')"></textarea>
-			 <div class="discriptionErrorMsg" id="activateErr">
-				            	     <span class="red-error">&nbsp;</span>
-				                   </div>
-			<!--Panel Action Button Start -->
-			<div class="col-sm-12 form-action-buttons">
-				<div class="col-sm-12">
-					<input type="submit" class="form-control button pull-right submit-button" value="Submit" onclick="return submitBeaconStatus();">
-				</div>
-			</div>
-		</form>
-		<!--Panel Action Button End -->
-		<p>Note: On changing the status, all associated users will become
-			same status</p>
-	</div>
+	
 	<!--Body Wrapper block End -->	
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

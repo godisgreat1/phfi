@@ -162,7 +162,7 @@
 													</fieldset>
 													<fieldset class="col-sm-4" style="margin-left: 330px;">
 														<label><spring:message code="com.phfi.wid" /><span class="required-field">*</span></label>
-														<form:select cssClass="form-control" path="wid" id="wid">
+														<form:select cssClass="form-control" path="wid" id="wid" onchange="fetchWomenNameByID()">
 															<form:option value="">--Select--</form:option>
 															 <c:forEach items="${allWidList}" var="allWid">
 																 <form:option value="${allWid}">${allWid}</form:option>
@@ -177,7 +177,7 @@
 												<fieldset class="col-sm-12" >
 												<fieldset class="col-sm-4" >
 														<label><spring:message code="com.phfi.nameOfTheWoman" /><span class="required-field">*</span></label>
-														<form:input cssClass="form-control" path="womanName" onchange="fetchWomenNameByID()"
+														<form:input cssClass="form-control" path="womanName" 
 															id="womanName" 
 															onblur="return clientValidation('womanName', 'alpha','nameErrorDiv')" />
 															
@@ -212,7 +212,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="haveFever" name="haveFever"
 															value="Yes" onclick="showFever()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="haveFever" name="haveFever" value="No"  onclick="hideFever()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="haveFever" name="haveFever" value="No"  onclick="hideFever()"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="haveFeverErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -229,7 +229,7 @@
 																name="isFeverAssocated" value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input
 																type="radio" id="isFeverAssocated"
 																name="isFeverAssocated" value="No"
-																onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+																 >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 															<div class="discriptionErrorMsg">
 																<span id="isFeverAssocatedErrorDiv" class="red-error">&nbsp;</span>
 															</div>
@@ -244,8 +244,8 @@
 															<input type="radio" id="isFeverComeAndGo"
 																name="isFeverComeAndGo" value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input
 																type="radio" id="isFeverComeAndGo"
-																name="isFeverComeAndGo" value="0"
-																onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+																name="isFeverComeAndGo" value="No"
+																 >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 															<div class="discriptionErrorMsg">
 																<span id="isFeverComeAndGoErrorDiv" class="red-error">&nbsp;</span>
 															</div>
@@ -259,7 +259,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isFits" name="isFits"
 															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isFits" name="isFits" value="No" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="isFits" name="isFits" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isFitsErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -272,7 +272,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isConsciousness" name="isConsciousness"
 															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isConsciousness" name="isConsciousness" value="0" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="isConsciousness" name="isConsciousness" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isConsciousnessErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -284,8 +284,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="haveHeadaches" name="haveHeadaches"
-															value="1"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="haveHeadaches" name="haveHeadaches" value="0" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="haveHeadaches" name="haveHeadaches" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="haveHeadachesErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -298,7 +298,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="haveBlurredVision" name="haveBlurredVision"
 															value="Yes" onclick="showHavePain()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="haveBlurredVision" name="haveBlurredVision" value="0" onclick="hideHavePain()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="haveBlurredVision" name="haveBlurredVision" value="No" onclick="hideHavePain()"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="haveBlurredVisionErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -311,7 +311,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isDifficultToFeed" name="isDifficultToFeed"
 															value="Yes" onclick="showHavePain()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isDifficultToFeed" name="isDifficultToFeed" value="No"  onclick="hideHavePain()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="isDifficultToFeed" name="isDifficultToFeed" value="No"  onclick="hideHavePain()"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isDifficultToFeedErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -328,7 +328,7 @@
 																name="painInBreast" value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input
 																type="radio" id="painInBreast"
 																name="painInBreast" value="No"
-																onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+																 >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 															<div class="discriptionErrorMsg">
 																<span id="painInBreastErrorDiv" class="red-error">&nbsp;</span>
 															</div>
@@ -343,8 +343,8 @@
 															<input type="radio" id="lumpInBreast"
 																name="lumpInBreast" value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input
 																type="radio" id="lumpInBreast"
-																name="lumpInBreast" value="0"
-																onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+																name="lumpInBreast" value="No"
+																 >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 															<div class="discriptionErrorMsg">
 																<span id="lumpInBreastErrorDiv" class="red-error">&nbsp;</span>
 															</div>
@@ -357,8 +357,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isBreathless" name="isBreathless"
-															value="1" onclick="showBreathless()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isBreathless" name="isBreathless" value="0" onblur="validateRadio()" onclick="hideBreathless()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes" onclick="showBreathless()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="isBreathless" name="isBreathless" value="No"   onclick="hideBreathless()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isBreathlessErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -372,7 +372,7 @@
 														<input type="checkbox" id="whenBreathless" name="whenBreathless"
 															value="while sitting or lying down"><spring:message code="com.phfi.whileSittingOrLyingDown" />&nbsp;<input type="checkbox" id="whenBreathless" name="whenBreathless"
 															value="cooking or cleaning"><spring:message code="com.phfi.cookingOrCleaning" />&nbsp; <input type="checkbox"
-															id="whenBreathless" name="whenBreathless" value="carrying load" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.carryingLoad" />
+															id="whenBreathless" name="whenBreathless" value="carrying load"  >&nbsp;&nbsp;<spring:message code="com.phfi.carryingLoad" />
 														<div class="discriptionErrorMsg">
 															<span id="whenBreathlessErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -404,8 +404,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="haveCough" name="haveCough"
-															value="1" onclick="showCough()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="haveCough" name="haveCough" value="0" onclick="hideCough()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes" onclick="showCough()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="haveCough" name="haveCough" value="No" onclick="hideCough()"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="haveCoughErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -418,8 +418,8 @@
 													</fieldset>
 													<fieldset class="col-sm-6">
 														<input type="radio" id="howLongHaveCough" name="howLongHaveCough"
-															value="1"><spring:message code="com.phfi.lessThanThreeWeeks" />&nbsp; <input type="radio"
-															id="howLongHaveCough" name="howLongHaveCough" value="0" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.moreThanThreeWeeks" />				<div class="discriptionErrorMsg">
+															value="Yes"><spring:message code="com.phfi.lessThanThreeWeeks" />&nbsp; <input type="radio"
+															id="howLongHaveCough" name="howLongHaveCough" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.moreThanThreeWeeks" />				<div class="discriptionErrorMsg">
 															<span id="diabetes" class="red-error">&nbsp;</span>
 														</div>
 													</fieldset>
@@ -430,8 +430,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isAbdominalPain" name="isAbdominalPain"
-															value="1" onclick="showAbnormalPain()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isAbdominalPain" name="isAbdominalPain" value="0" onclick="hideAbnormalPain()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes" onclick="showAbnormalPain()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="isAbdominalPain" name="isAbdominalPain" value="No" onclick="hideAbnormalPain()"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isAbdominalPainErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -444,11 +444,11 @@
 													</fieldset>
 													<fieldset class="col-sm-6">
 														<input type="radio" id="wherePain" name="wherePain"
-															value="1"><spring:message code="com.phfi.upperAbdomen" />&nbsp;
+															value="Yes"><spring:message code="com.phfi.upperAbdomen" />&nbsp;
 															<input type="radio" id="wherePain" name="wherePain"
-															value="1"><spring:message code="com.phfi.lowerAbdomen" />&nbsp;
+															value="Yes"><spring:message code="com.phfi.lowerAbdomen" />&nbsp;
 															 <input type="radio"
-															id="wherePain" name="wherePain" value="0" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.allOver" />
+															id="wherePain" name="wherePain" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.allOver" />
 														<div class="discriptionErrorMsg">
 															<span id="wherePainError" class="red-error">&nbsp;</span>
 														</div>
@@ -460,8 +460,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isVaginalDischarge" name="isVaginalDischarge"
-															value="1"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isVaginalDischarge" name="isVaginalDischarge" value="0" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="isVaginalDischarge" name="isVaginalDischarge" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isVaginalDischargeErroDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -473,8 +473,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isBleeding" name="isBleeding"
-															value="1" onclick="showBleeding()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isBleeding" name="isBleeding" value="0" onclick="hideBleeding()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes" onclick="showBleeding()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="isBleeding" name="isBleeding" value="No" onclick="hideBleeding()"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isBleedingErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -503,7 +503,7 @@
 														<fieldset class="col-sm-3">
 															<input type="radio" id="isPassClotBleeding" name="isPassClotBleeding"
 															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isPassClotBleeding" name="isPassClotBleeding" value="No" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="isPassClotBleeding" name="isPassClotBleeding" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isPassClotBleedingErroDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -546,7 +546,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isBurningPain" name="isBurningPain"
 															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isBurningPain" name="isBurningPain" value="No" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="isBurningPain" name="isBurningPain" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isBurningPainErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -557,13 +557,13 @@
 													<fieldset class="col-sm-7 pull-right">
 														<input type="button"
 															class="form-control button pull-right askTheWomenSec-next"
-															value="Continue" onclick="return validateContact()"> <input type="button"
+															value="Continue" > <input type="button"
 															class="form-control button pull-right marginL10 askTheWomenSec-prev"
 															value="Previous"> <input type="button"
 															class="form-control button pull-right marginL10"
 															value="Reset" onclick="return resetContact()"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -577,8 +577,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="outOfBreath" name="outOfBreath"
-															value="1"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="outOfBreath" name="outOfBreath" value="0" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="outOfBreath" name="outOfBreath" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="outOfBreathErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -591,7 +591,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isTalking" name="isTalking"
 															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isTalking" name="isTalking" value="No" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="isTalking" name="isTalking" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isTalkingErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -608,7 +608,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="upperEyeColor" name="upperEyeColor"
 															value="Yes"><spring:message code="com.phfi.white" />&nbsp; <input type="radio"
-															id="upperEyeColor" name="upperEyeColor" value="No" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.yellow" />
+															id="upperEyeColor" name="upperEyeColor" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.yellow" />
 														<div class="discriptionErrorMsg">
 															<span id="UpperEyeColorErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -619,7 +619,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="lowerEyeColor" name="lowerEyeColor"
 															value="Yes"><spring:message code="com.phfi.pink" />&nbsp; <input type="radio"
-															id="lowerEyeColor" name="lowerEyeColor" value="No" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.pale" />
+															id="lowerEyeColor" name="lowerEyeColor" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.pale" />
 														<div class="discriptionErrorMsg">
 															<span id="LowerEyeColorErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -633,7 +633,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isAnkleDepression" name="isAnkleDepression"
 															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isAnkleDepression" name="isAnkleDepression" value="No" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="isAnkleDepression" name="isAnkleDepression" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isAnkleDepressionErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -646,7 +646,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isEyeSwelling" name="isEyeSwelling"
 															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isEyeSwelling" name="isEyeSwelling" value="No" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="isEyeSwelling" name="isEyeSwelling" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isEyeSwellingErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -670,7 +670,7 @@
 												<!--Panel Action Button End -->
 											</section>
 											<!-- observe Content End -->
-											<!--Test Results part 1 Content Start -->
+											<!--Test Results part Yes Content Start -->
 											<section class="field-element-row testresultfirst-details-content" style="display: none;">
 												<fieldset class="col-sm-12" >
 													<fieldset class="col-sm-6">
@@ -680,7 +680,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="bp" name="bp"
 															value="Yes" onclick="showBp()"><spring:message code="com.phfi.done" />&nbsp; <input type="radio"
-															id="bp" name="bp" value="No" onclick="hideBp()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
+															id="bp" name="bp" value="No" onclick="hideBp()"  >&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
 														<div class="discriptionErrorMsg">
 															<span id="bpErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -741,7 +741,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="hb" name="hb"
 															value="Yes" onclick="showHb()"><spring:message code="com.phfi.done" />&nbsp; <input type="radio"
-															id="hb" name="hb" value="No" onclick="hideHb()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
+															id="hb" name="hb" value="No" onclick="hideHb()"  >&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
 														<div class="discriptionErrorMsg">
 															<span id="hbErrorId" class="red-error">&nbsp;</span>
 														</div>
@@ -802,7 +802,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="urine" name="urine"
 															value="Yes" onclick="showUrine()"><spring:message code="com.phfi.done" />&nbsp; <input type="radio"
-															id="urine" name="urine" value="No" onclick="hideUrine()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
+															id="urine" name="urine" value="No" onclick="hideUrine()"  >&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
 														<div class="discriptionErrorMsg">
 															<span id="urineErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -880,7 +880,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" > <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -896,7 +896,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="malaria" name="malaria"
 															value="Yes" onclick="showMalaria()"><spring:message code="com.phfi.done" />&nbsp; <input type="radio"
-															id="malaria" name="malaria" value="No" onclick="hideMalaria()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
+															id="malaria" name="malaria" value="No" onclick="hideMalaria()"  >&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
 														<div class="discriptionErrorMsg">
 															<span id="malariaErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -956,7 +956,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="sputum" name="sputum"
 															value="Yes" onclick="showSputum()"><spring:message code="com.phfi.done" />&nbsp; <input type="radio"
-															id="sputum" name="sputum" value="No" onclick="hideSputum()" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
+															id="sputum" name="sputum" value="No" onclick="hideSputum()"  >&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
 														<div class="discriptionErrorMsg">
 															<span id="sputumErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -992,13 +992,13 @@
 													<fieldset class="col-sm-7 pull-right">
 														<input type="button"
 															class="form-control button pull-right testresultsec-next"
-															value="Continue" onclick="return validateObstetric()"> <input type="button"
+															value="Continue" > <input type="button"
 															class="form-control button pull-right marginL10 testresultsec-prev"
 															value="Previous"> <input type="button"
 															class="form-control button pull-right marginL10"
 															value="Reset" onclick="return resetObstetric()"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -1012,8 +1012,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="talkingIrrelevantly" name="talkingIrrelevantly"
-															value="1"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="talkingIrrelevantly" name="talkingIrrelevantly" value="0" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="talkingIrrelevantly" name="talkingIrrelevantly" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="talkingIrrelevantlyErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -1026,7 +1026,7 @@
 													<fieldset class="col-sm-3">
 														<input type="radio" id="carringBabyAndHerself" name="carringBabyAndHerself"
 															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="carringBabyAndHerself" name="carringBabyAndHerself" value="No" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															id="carringBabyAndHerself" name="carringBabyAndHerself" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="carringBabyAndHerselfErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -1038,8 +1038,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="isHearingImaginary" name="isHearingImaginary"
-															value="1"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="isHearingImaginary" name="isHearingImaginary" value="0" onblur="validateRadio()">&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="isHearingImaginary" name="isHearingImaginary" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="isHearingImaginaryErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -1056,7 +1056,7 @@
 															class="form-control button pull-right marginL10"
 															value="Reset" onclick="return resetOther()"> <input type="button"
 															class="form-control button pull-right marginL10"
-															value="Cancel">
+															value="Cancel" onclick="cancel()">
 													</fieldset>
 												</div>
 												<!--Panel Action Button End -->
@@ -1426,16 +1426,16 @@
 	<script src="../js_new/jquery.datetimepicker.js"></script>
 	<script src="../js_new/common-lib.js"></script>
 	<script src="../js_new/validation.js"></script>
-	<script src="../js_new/registration.js"></script>
+	<!-- <script src="../js_new/registration.js"></script> -->
 	<script src="../js_new/chatak-ajax.js"></script>
 	<script src="../js_new/messages.js"></script>
 	<script src="../js_new/hideAndShow.js"></script>
 	<script src="../js_new/postpartumVisit.js"></script>
 	
 	<!--Body Wrapper block End -->
-	<script type="text/javascript" src="../js_new/merchant.js"></script>
+	<!-- <script type="text/javascript" src="../js_new/merchant.js"></script> -->
 	<script type="text/javascript" src="../js_new/backbutton.js"></script>
-	<script type="text/javascript" src="../js_new/visitform.js"></script>
+	<!-- <script type="text/javascript" src="../js_new/visitform.js"></script> -->
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script>
@@ -1447,7 +1447,7 @@ $(document).ready(function() {
 			timepicker : false,
 			format : 'd/m/Y',
 			formatDate : 'Y/m/d',
-			 maxDate: '0',
+			 maxDate: 'Yes',
 		});
 
 		$(".dateOfrcntDlv").click(function() {
@@ -1599,9 +1599,9 @@ $(document).ready(function() {
 		$(".confirm-info-list,.askthefamily-next")
 				.click(
 						function() {
-							/*  if (!setAshaInfo()|!setAskTheWoman()|!setObserve()|!setTestResult()|!setAskTheFamily()) {
+							if (!setAshaInfo()|!setAskTheWoman()|!setObserve()|!setTestResult()|!setAskTheFamily()) {
 									return false;
-								}  */
+								} 
 							$(".confirm-circle-tab").addClass("active-circle");
 							$(
 									".womenInfo-circle-tab,.askTheWomen-circle-tab,.askTheWomenRest-circle-tab,.observe-circle-tab,.testResultFirst-circle-tab,.testResultSec-circle-tab,.askTheFamily-circle-tab")
@@ -1616,6 +1616,10 @@ $(document).ready(function() {
 									.hide();
 						});
 });
+
+function cancel(){
+	document.location.href='show-phfi-postpartum-visit-form';
+}
 	</script>
 </body>
 </html>

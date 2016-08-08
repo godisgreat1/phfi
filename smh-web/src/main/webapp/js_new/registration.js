@@ -214,19 +214,7 @@ function resetOther(){
 }
 
 function validateAsha(){
-	var flag = true;
-	if(!clientValidation('regDate', 'required','regDateErrorDiv')
-		|| !clientValidation('villageId', 'numericField','villageIdErrorId')
-		|| !clientValidation('uid', 'numericField','uidErrorId')
-		|| !clientValidation('villageName', 'alphanumericField','villageNameErrorDiv')
-		|| !clientValidation('phc', 'alphaField','phcErrorId')
-		|| !clientValidation('ashaName', 'alphaField','ashaNameErrorId')
-		|| !clientValidation('anmName', 'alphaField','anmNameErrorId')
-		|| !clientValidation('ashaFacilitatorName', 'alphaField','ashaFacilitatorNameErrorId')
-		){
-		flag = false;
-		return flag;
-	}else	{	
+	
 		setLable('confirmregDate', get('regDate').value.trim());
 		setLable('confirmVillageId', get('villageId').value.trim());
 		setLable('confirmUuid', get('uid').value.trim());
@@ -235,23 +223,13 @@ function validateAsha(){
 		setLable('confirmAshaName', get('ashaName').value.trim());
 		setLable('confirmANM', get('anmName').value.trim());
 		setLable('confirmAshsaFacil', get('ashaFacilitatorName').value.trim());
-		return flag;
-	}
+	
+		return true;
 }
 
 
 function validatePreliminary(){
-	var flag = true;
-	if(!clientValidation('womenFirstName', 'alphaField','womenFirstNameErrorDiv')
-		|| !clientValidation('womenHusbandName', 'alphaField','womenHusbandNameErrorDiv')
-		|| !clientValidation('womenSurname', 'alphaField','womenSurnameErrorDiv')
-		|| !clientValidation('husbandFirstName', 'alphaField','husbandFirstNameErrorDiv')
-		|| !clientValidation('husbandFirstName', 'alphaField','husbandFatherNameErrorDiv')
-		|| !clientValidation('husbandSurname', 'alphaField','husbandSurnameErrorDiv')
-		){
-		flag = false;
-		return flag;
-	}else	{	
+	
 		setLable('confirmWomenFirstName', get('womenFirstName').value.trim());
 		setLable('confirmWomenHusbandname', get('womenHusbandName').value.trim());
 		setLable('confirmWomenSurname', get('womenSurname').value.trim());
@@ -259,34 +237,14 @@ function validatePreliminary(){
 		setLable('confirmFatherName', get('husbandFatherName').value.trim());
 		setLable('confirmHusbandSurname', get('husbandSurname').value.trim());
 		
-		setLable('confirmMaternityStatus', get('maternityStatus').value.trim());
+		setLable('confirmMaternityStatus', $('input[name=maternityStatus]:checked').val().trim());
 		setLable('confirmRegistrationDate', get('regDate').value.trim());
 		
-		return flag;
-	}
+		return true;
 }
 
 function validateContact(){
-	var flag = true;
-	if(!clientValidation('streetMarital', 'alphanumericField','streetErrorDiv')
-		|| !clientValidation('landmarkMarital', 'alphanumericField','landmarkMaritalErrorDiv')
-		|| !clientValidation('villageMarital', 'alphanumericField','villageErrorDiv')
-		|| !clientValidation('talukMarital', 'alphanumericField','talukErrorDiv')
-		|| !clientValidation('districtMarital', 'alphanumericField','districtMaritalErrorDiv')
-		|| !clientValidation('phone1Marital', 'alphanumericField','phone1MaritalErrorDiv')
-		|| !clientValidation('phone2Marital', 'alphanumericField','phone2MaritaleErrorDiv')
-		|| !clientValidation('streetNatal', 'alphanumericField','streetNatalErrorDiv')
-		|| !clientValidation('landmarkNatal', 'alphanumericField','landmarkNatalErrorDiv')
-		|| !clientValidation('villageNatal', 'alphanumericField','villageNatalErrorDiv')
-		|| !clientValidation('talukNatal', 'alphanumericField','talukNatalErrorDiv')
-		|| !clientValidation('districtNatal', 'alphanumericField','districtNatalErrorDiv')
-		|| !clientValidation('phone1Natal', 'mobile_phone','phone1NataleErrorDiv')
-		|| !clientValidation('phone2Natal', 'mobile_phone','phone2NatalErrorDiv')
-		|| !clientValidation('currentPlace', 'dropdownField','currentPlaceErrorDiv')
-		){
-		flag = false;
-		return flag;
-	}else	{	
+	
 		setLable('confirmStreetMarital', get('streetMarital').value.trim());
 		setLable('confirmLandmarkMarital', get('landmarkMarital').value.trim());
 		setLable('confirmVillageMarital', get('villageMarital').value.trim());
@@ -302,40 +260,31 @@ function validateContact(){
 		setLable('confirmPhone1Natal', get('phone1Natal').value.trim());
 		setLable('confirmPhone2Natal', get('phone2Natal').value.trim());
 		setLable('confirmCurrentPlace', get('currentPlace').value.trim());
-		return flag;
-	}
+		
+		return true;
 }
 
 
 
 
 function validatePersonal(){
-	var flag = true;
-	if(!clientValidation('age', 'alphanumericField','ageErrorDiv')
-		|| !clientValidation('education', 'dropdownField','educationErrorDiv')
-		|| !clientValidation('religion', 'dropdownField','religionErrorDiv')
-		|| !clientValidation('caste', 'alphaField','casteErrordiv')
-		|| !clientValidation('castcategory', 'dropdownField','castcategoryErrorDiv')
-		){
-		flag = false;
-		return flag;
-	}else	{	
+
 		setLable('confirmAge', get('age').value.trim());
 		setLable('confirmEducation', get('education').value.trim());
 		setLable('confirmRelegion', get('religion').value.trim());
 		setLable('confirmCaste', get('caste').value.trim());
 		setLable('confirmCasteCategory', get('castcategory').value.trim());
-		return flag;
-	}
+		
+		return true;
 }
 
 function setPastHistory(){
-	setLable('confirmdiabetes', get('diabetes').value.trim());
-	setLable('confirmhypertension', get('hypertension').value);
-	setLable('confirmheartdisease', get('heartdisease').value);
-	setLable('confirmAnaemia', get('anaemia').value);
-	setLable('confirmThyroid', get('thyroidproblem').value);
-	setLable('confirmAnyOtherProblem', get('anyotherproblem').value);
+	setLable('confirmdiabetes', $('input[name=diabetes]:checked').val());
+	setLable('confirmhypertension', $('input[name=hypertension]:checked').val());
+	setLable('confirmheartdisease', $('input[name=heartdisease]:checked').val());
+	setLable('confirmAnaemia', $('input[name=anaemia]:checked').val());
+	setLable('confirmThyroid', $('input[name=thyroidproblem]:checked').val());
+	setLable('confirmAnyOtherProblem', $('input[name=anyotherproblem]:checked').val());
 	return true;
 }
 
@@ -350,21 +299,14 @@ function validateObstetric(){
 		setLable('confirmdateOfRecentDelivery', get('dateOfRecentDelivery').value.trim());
 		setLable('confirmEarlyDelDate', get('earlyDelivery').value.trim());
 		setLable('confirmCaesareancount', get('caesarean').value.trim());
-		setLable('confirmBreathlessness', get('breathlessness').value.trim());
-		setLable('confirmSeverepallor', get('severepallor').value.trim());
-		setLable('confirmBleedexcessively', get('bleedexcessively').value.trim());
+		setLable('confirmBreathlessness', $('input[name=breathlessness]:checked').val());
+		setLable('confirmSeverepallor', $('input[name=severepallor]:checked').val());
+		setLable('confirmBleedexcessively', $('input[name=bleedexcessively]:checked').val());
 		return true;
 }
 
 function validateOther(){
-	var flag = true;
-	if(!clientValidation('lmp', 'required','lmpErrorDiv')
-		|| !clientValidation('height', 'numericField','heightErrorDiv')
-		|| !clientValidation('bloodgroup', 'dropdownField','bloodgroupErrorDiv')
-		){
-		flag = false;
-		return flag;
-	}else	{	
+
 		setLable('confirmLmp', get('lmp').value.trim());
 		setLable('confirmHeight', get('height').value.trim());
 		setLable('confirmBloodGroup', get('bloodgroup').value.trim());
@@ -374,8 +316,7 @@ function validateOther(){
 		setLable('confirmAshaName', get('ashaName').value.trim());
 		setLable('confirmANM', get('anmName').value.trim());
 		setLable('confirmAshsaFacil', get('ashaFacilitatorName').value.trim());
-		return flag;
-	}
+		return true;
 }
 
 function validateConfirm(){
@@ -384,13 +325,12 @@ function validateConfirm(){
 	 | validateContact()
 	 | validatePersonal()
 	 | validateObstetric()
-	 | validateOther())
+	 | validateOther()
+	 | setPastHistory())
 	 {
-		 flag = false;
-     }else{
-    	 flag = true;
-     }
-	 return flag;
+		
+	 return flag;}
+	 
 }
 
 function viewMedicalCaseSheet(uuid) {

@@ -63,9 +63,9 @@ public class Condition {
 	public static final String PASTHISTORY4 = "Anaemia";
 	public static final String PASTHISTORY5 = "Thyroid";
 	
-	public static final String HIGH = "High";
-	public static final String LOW = "Low";
-	public static final String EMERGENCY = "Emergency";
+	public static final String HIGH = "Risk";
+	public static final String LOW = "No abnormality detected";
+	public static final String EMERGENCY = "High Risk";
 	
 	
 	

@@ -63,7 +63,7 @@
 					</div>
 					<!-- Tab Buttons End -->
 					
-					
+					<div class="main-content-holder padding0">
 						<!-- Page Form Start -->
 						<form:form action="process-doctor-visit-form" commandName="phfiDoctorFormRequest" name="phfiDoctorFormRequest" method="POST">
 							<div class="col-sm-12 paddingT20">
@@ -295,15 +295,10 @@
 															<span id="assesmentstatusErrorId" class="red-error">&nbsp;</span>
 														</div>
 													</fieldset>
-													<fieldset class="col-sm-4" >
-														<label><spring:message code="com.phfi.doctor.advice" /><span class="required-field">*</span></label>
-														<form:input cssClass="form-control" path="advice" 
-															id="advice" 
-															onblur="return clientValidation('advice', 'alpha','adviceErrorId')" />
-														<div class="discriptionErrorMsg">
-															<span id="adviceErrorId" class="red-error">&nbsp;</span>
-														</div>
+													<fieldset class="col-sm-12">
+													<label><b><spring:message code="com.phfi.doctor.advice" /></b></label>
 													</fieldset>
+													
 													<fieldset class="col-sm-4" >
 														<label><spring:message code="com.phfi.doctor.investigations" /><span class="required-field">*</span></label>
 														<form:input cssClass="form-control" path="investigations" 
@@ -322,7 +317,7 @@
 													</fieldset>
 												
 												<fieldset class="col-sm-4" >
-														<label><spring:message code="com.phfi.doctor.health" /><span class="required-field">*</span></label>
+														<label>instructions to ANM <span class="required-field">*</span></label>
 														<form:input cssClass="form-control" path="health" 
 															id="health" 
 															onblur="return clientValidation('health', 'alpha','healthErrorId')" />
@@ -330,7 +325,14 @@
 															<span id="healthErrorId" class="red-error">&nbsp;</span>
 														</div>
 													</fieldset>
-												
+												<fieldset class="col-sm-4" >
+														<label>when should the woman come back to see you<span class="required-field">*</span></label>
+														<form:input cssClass="form-control" path="advice" 
+															id="advice"  />
+														<div class="discriptionErrorMsg">
+															<span id="adviceErrorId" class="red-error">&nbsp;</span>
+														</div>
+													</fieldset>
 												</fieldset>
 													
 												
@@ -351,12 +353,14 @@
 							</div>
 						</form:form>
 						<!-- Page Form End -->
+					
 							</div>
 						</div>
 						</article>
 					</div>
 					<!-- Content Block End -->
 				</div>
+				
 			<!--Article Block End-->
 			<jsp:include page="footer.jsp"></jsp:include>
 		<!--Container block End -->
@@ -390,7 +394,6 @@ $(document).ready(function() {
 			timepicker : false,
 			format : 'd/m/Y',
 			formatDate : 'Y/m/d',
-			maxDate: '0', 
 		});
 
 		$(".dateOfrcntDlv").click(function() {
@@ -400,7 +403,6 @@ $(document).ready(function() {
 			timepicker : false,
 			format : 'd/m/Y',
 			formatDate : 'Y/m/d',
-			maxDate: '0', 
 		});
 		$(".lmpdate").click(function() {
 			$(this).children('.lmp').focus();
@@ -409,7 +411,6 @@ $(document).ready(function() {
 			timepicker : false,
 			format : 'd/m/Y',
 			formatDate : 'Y/m/d',
-			maxDate: '0', 
 		});
 		$(".women-info-content").show();
 		$(".womenInfo-arrow").show();
@@ -446,6 +447,10 @@ $(document).ready(function() {
 					$(".confirm-details-content").show();
 					$(".women-info-content,.delivery-info-content").hide();
 				});	
+		
+		function cancel(){
+			document.location.href='show-doctor-form';
+		}
 	</script>
 </body>
 </html>
