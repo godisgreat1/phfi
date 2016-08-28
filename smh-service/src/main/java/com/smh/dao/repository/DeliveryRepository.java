@@ -18,4 +18,5 @@ import com.smh.dao.model.Delivery;
  */
 public interface DeliveryRepository extends JpaRepository<Delivery, Long>, QueryDslPredicateExecutor<Delivery> {
 
+		public Delivery findByWid(int uid);
 }

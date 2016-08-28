@@ -56,7 +56,7 @@ public class Doctor implements Serializable{
 	private String years;
 	
 	@Column(name = "WID")
-	private String wid;
+	private Integer wid;
 	
 	@Column(name = "VILLAGE")
 	private String village;
@@ -201,18 +201,7 @@ public class Doctor implements Serializable{
 	public void setYears(String years) {
 		this.years = years;
 	}
-	/**
-	 * @return the wid
-	 */
-	public String getWid() {
-		return wid;
-	}
-	/**
-	 * @param wid the wid to set
-	 */
-	public void setWid(String wid) {
-		this.wid = wid;
-	}
+	
 	/**
 	 * @return the village
 	 */
@@ -404,6 +393,12 @@ public class Doctor implements Serializable{
 	 */
 	public void setHealth(String health) {
 		this.health = health;
+	}
+	public Integer getWid() {
+		return wid;
+	}
+	public void setWid(Integer wid) {
+		this.wid = wid;
 	}
 
 }

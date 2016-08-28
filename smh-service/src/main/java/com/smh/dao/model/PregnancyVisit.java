@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 /**
  *
- * << Add Comments Here >>
+ * << Add Comments Here >
  *
  * @author Shekhar Prasad
  * @date Jan 14, 2016 11:45:14 PM

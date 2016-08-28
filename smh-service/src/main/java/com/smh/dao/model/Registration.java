@@ -199,6 +199,9 @@ public class Registration implements Serializable{
     @Column(name = "BLOOD_GROUP")
 	private String bloodgroup;
     
+    @Column(name="status")
+    private String status;
+    
     @Column(name = "CREATED_DATE")
     private String createdDate;
 
@@ -1065,6 +1068,14 @@ public class Registration implements Serializable{
 	 */
 	public void setMaternityStatus(String maternityStatus) {
 		this.maternityStatus = maternityStatus;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 		  

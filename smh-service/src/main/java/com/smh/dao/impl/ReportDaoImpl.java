@@ -117,7 +117,7 @@ public class ReportDaoImpl implements ReportDao{
 					   isMaternityStatusEq(reportRequest.getMaternityStatus()),
 					   isAshaNameEq(reportRequest.getNameOfAsha()),
 					   isVillageNameEq(reportRequest.getVillageName()),
-					  /* isAssestmentStatusEq(reportRequest.getClinicalStatus()))*/
+					   isAssestmentStatusEq(reportRequest.getClinicalStatus()),
 					   isAnmNameEq(reportRequest.getAnmName()))
 				.offset(offset)
 				.limit(limit)
@@ -141,7 +141,7 @@ public class ReportDaoImpl implements ReportDao{
 					   isMaternityStatusEq(reportRequest.getMaternityStatus()),
 					   isAshaNameEq(reportRequest.getNameOfAsha()),
 					   isVillageNameEq(reportRequest.getVillageName()),
-					   /* isAssestmentStatusEq(reportRequest.getClinicalStatus()))*/
+					    isAssestmentStatusEq(reportRequest.getClinicalStatus()),
 					   isAnmNameEq(reportRequest.getAnmName()))
 				.list(registration.id);
 		return (StringUtil.isListNotNullNEmpty(list) ? list.size() : 0);
@@ -156,7 +156,7 @@ public class ReportDaoImpl implements ReportDao{
 		QDoctor doctor = QDoctor.doctor;
 		List<Integer> list = query
 				.from(doctor)
-				.where(isWIDEq(reportRequest.getWid()),     
+				.where(isWIDDoctoreEq(reportRequest.getWid()),     
 					   isVillageEq(reportRequest.getVillage()),
 					   //isAshaEq(reportRequest.getNameOfAsha()),
 			  		   //isAnmEq(reportRequest.getAnmName()),
@@ -167,9 +167,14 @@ public class ReportDaoImpl implements ReportDao{
 		return (StringUtil.isListNotNullNEmpty(list) ? list.size() : 0);
 	}
 	
-	private BooleanExpression isWIDEq(String wid) {
-		return (wid !=null && !("".equals(wid))) ? QDoctor.doctor.wid.eq(wid): null;
+	private BooleanExpression isWIDEq(Integer uid) {
+		return (uid !=null && !("".equals(uid))) ? QRegistration.registration.uid.eq(uid): null;
 	}
+	
+	private BooleanExpression isWIDDoctoreEq(Integer uid) {
+		return (uid !=null && !("".equals(uid))) ? QDoctor.doctor.wid.eq(uid): null;
+	}
+	
 	private BooleanExpression isVillageEq(String village) {
 		return (village !=null && !("".equals(village))) ? QDoctor.doctor.village.eq(village): null;
 	}
@@ -197,9 +202,9 @@ public class ReportDaoImpl implements ReportDao{
 	private BooleanExpression isVillageNameEq(String villageName) {
 		return (villageName !=null && !("".equals(villageName))) ? QRegistration.registration.villageName.eq(villageName): null;
 	}
-	/*private BooleanExpression isAssestmentStatusEq(String clinicalStatus) {
-		return (clinicalStatus !=null && !("".equals(clinicalStatus))) ? QRegistration.registration.clinicalStatus.eq(clinicalStatus): null;
-	}*/
+	private BooleanExpression isAssestmentStatusEq(String clinicalStatus) {
+		return (clinicalStatus !=null && !("".equals(clinicalStatus))) ? QRegistration.registration.status.eq(clinicalStatus): null;
+	}
 	private BooleanExpression isAnmNameEq(String anmName) {
 		return (anmName !=null && !("".equals(anmName))) ? QRegistration.registration.anmName.eq(anmName): null;
 	}
@@ -285,12 +290,13 @@ public class ReportDaoImpl implements ReportDao{
 		QDoctor doctor = QDoctor.doctor;
 		List<Doctor> doctorList = query
 				.from(doctor)
-				.where(isWIDEq(reportRequest.getWid()),
-					   isVillageEq(reportRequest.getVillage()),
+				.where(isWIDDoctoreEq(reportRequest.getWid())
+					   //isVillageEq(reportRequest.getVillage()),
 					   //isAshaEq(reportRequest.getNameOfAsha()),
 					   //isAnmEq(reportRequest.getAnmName()),
-					   isFromDateEq(reportRequest.getFromDate()),
-					   isToDateEq(reportRequest.getToDate()))
+					   //isFromDateEq(reportRequest.getFromDate()),
+					   //isToDateEq(reportRequest.getToDate())
+						)
 				.offset(offset)
 				.limit(limit)
 				//.orderBy(QDoctor.doctor.createdDate.desc())
