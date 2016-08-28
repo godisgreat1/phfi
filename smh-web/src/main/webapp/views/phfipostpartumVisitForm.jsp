@@ -576,7 +576,7 @@
 														<label><spring:message code="com.phfi.doesLookOutOfBreath" /><span class="required-field">*</span></label>
 													</fieldset>
 													<fieldset class="col-sm-3">
-														<input type="radio" id="outOfBreath" name="outOfBreath"
+														<input type="radio" id="outOfBreath" name="isoutOfBreath"
 															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
 															id="outOfBreath" name="outOfBreath" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
@@ -607,8 +607,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="upperEyeColor" name="upperEyeColor"
-															value="Yes"><spring:message code="com.phfi.white" />&nbsp; <input type="radio"
-															id="upperEyeColor" name="upperEyeColor" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.yellow" />
+															value="White"><spring:message code="com.phfi.white" />&nbsp; <input type="radio"
+															id="upperEyeColor" name="upperEyeColor" value="Yellow"  >&nbsp;&nbsp;<spring:message code="com.phfi.yellow" />
 														<div class="discriptionErrorMsg">
 															<span id="UpperEyeColorErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -618,8 +618,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="lowerEyeColor" name="lowerEyeColor"
-															value="Yes"><spring:message code="com.phfi.pink" />&nbsp; <input type="radio"
-															id="lowerEyeColor" name="lowerEyeColor" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.pale" />
+															value="Pink"><spring:message code="com.phfi.pink" />&nbsp; <input type="radio"
+															id="lowerEyeColor" name="lowerEyeColor" value="Pale"  >&nbsp;&nbsp;<spring:message code="com.phfi.pale" />
 														<div class="discriptionErrorMsg">
 															<span id="LowerEyeColorErrorDiv" class="red-error">&nbsp;</span>
 														</div>

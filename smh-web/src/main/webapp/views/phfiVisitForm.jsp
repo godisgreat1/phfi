@@ -1260,7 +1260,7 @@
 													<fieldset class="col-sm-3">
 														<form:radiobutton id="malaria" path="malaria"
 															value="Done" onclick="showMalaria()"/><spring:message code="com.phfi.done" />&nbsp; <form:radiobutton
-															id="malaria" path="malaria" value="No Done" onclick="hideMalaria()" onblur="validateRadio()"/>&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
+															id="malaria" path="malaria" value="Not Done" onclick="hideMalaria()" onblur="validateRadio()"/>&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
 														<div class="discriptionErrorMsg">
 															<span id="malariaErrorDiv" class="red-error">&nbsp;</span>
 														</div>

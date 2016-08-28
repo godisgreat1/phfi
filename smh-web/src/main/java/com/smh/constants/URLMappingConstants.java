@@ -251,6 +251,10 @@ public interface URLMappingConstants {
 	
 	public static final String GET_DOCTOR_FORM_REPORT = "getDoctorFormReport";
 	
+	public static final String PHFI_REGISTER_WOMAN_PAGINATION = "phfiRegistratedWomanPagination";
+	
+	public static final String PHFI_MASTER_REPORT_PAGINATION = "getMasterReportPagination";
+	
 	
 	
 }

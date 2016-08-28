@@ -28,6 +28,7 @@ import com.smh.model.MedicalCaseSheetDTO;
 import com.smh.model.PhfiDeliveryFormResponse;
 import com.smh.model.PhfiDoctorFormRequest;
 import com.smh.model.PhfiPostPartumVisitResponse;
+import com.smh.model.PhfiRegistrationRequest;
 import com.smh.model.PhfiRegistrationResponse;
 import com.smh.model.PhfiVisitResponse;
 import com.smh.model.ReportRequest;
@@ -94,7 +95,34 @@ public class ReportController extends BaseController implements URLMappingConsta
 		return modelAndView;
 	  }
 	
-	
+	@RequestMapping(value = PHFI_MASTER_REPORT_PAGINATION, method = RequestMethod.POST)
+	public ModelAndView getMasterReportPagination(HttpSession session, @FormParam("pageNumber") final Integer pageNumber, @FormParam("totalRecords") final Integer totalRecords, Map model) {
+		ModelAndView modelAndView = new ModelAndView(SHOW_MASTER_REPORT);
+		logger.info("Entering :: ReportController ::getMasterReportPagination method ");
+		ReportRequest reportRequest = (ReportRequest) session.getAttribute(Constant.PHFI_REQUEST);
+		try {
+			model.put("reportRequest",reportRequest);
+			reportRequest.setPageIndex(pageNumber);
+			reportRequest.setNoOfRecords(totalRecords);
+			reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
+			ReportResponse reportResponse = reportService.getMasterReport(reportRequest);
+			List<ReportRequest> reportRequests = new ArrayList<ReportRequest>();
+			if (reportResponse != null && !CollectionUtils.isEmpty(reportResponse.getReportRequest())) {
+				reportRequests = reportResponse.getReportRequest();
+				modelAndView = PaginationUtil.getPagenationModelSuccessive(modelAndView, pageNumber, reportResponse.getNoOfRecords());
+				model.put("totalCount", reportResponse.getNoOfRecords());
+				model.put("masterReportList", reportRequests);
+				modelAndView.addObject("resultflag", true);
+				
+			}
+		} catch (Exception e) {
+			logger.error("Errorg :: ReportController ::getMasterReportPagination method ", e);
+			modelAndView.setViewName(INVALID_PAGE);
+		}
+		
+		logger.info("Exiting :: ReportController ::getMasterReportPagination method ");
+		return modelAndView;
+	}
 
 	@RequestMapping(value = GET_DOCTOR_RATIFIED_REPORT, method = RequestMethod.GET)
 	 public ModelAndView processDoctorRatifiedReportSearch(HttpServletRequest request,

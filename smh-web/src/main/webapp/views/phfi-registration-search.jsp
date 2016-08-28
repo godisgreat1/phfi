@@ -58,7 +58,7 @@
 										<span class="red-error" id="errorDiv">${error}</span>
 									</div>
 								</div>
-								<form action="beacon-pagination" name="paginationForm" method="post">
+								<form action="phfiRegistratedWomanPagination" name="paginationForm" method="post">
 									<input type="hidden" id="pageNumberId" name="pageNumber" />
 									 <input type="hidden" id="totalRecordsId" name="totalRecords" />
 								</form>

@@ -175,9 +175,9 @@ function setTestResult(){
 	
 	
 	setLable('confirmUsStatus', $('input[name=ultrasound]:checked').val());
-	setLable('confirmFirstUs', get('firstUltrasound').value.trim());
+	/*setLable('confirmFirstUs', get('firstUltrasound').value.trim());*/
 	setLable('confirmFirstUsDate', get('ultrasoundDateOne').value.trim());
-	setLable('confirmSecUs', get('secUltrasound').value.trim());
+	/*setLable('confirmSecUs', get('secUltrasound').value.trim());*/
 	setLable('confirmSecUsDate', get('ultrasoundDateSec').value.trim());
 	/*
 	setLable('confirmRbsStatus', get('regDate').value.trim());

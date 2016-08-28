@@ -1,5 +1,7 @@
 package com.smh.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +23,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.smh.constants.Constant;
 import com.smh.constants.PHFIWebConstant;
 import com.smh.constants.URLMappingConstants;
+import com.smh.enums.RoleLevel;
 import com.smh.exception.SmhAdminException;
 import com.smh.model.AdminUserRequest;
+import com.smh.model.AdminUserResponse;
 import com.smh.model.AllWidResponse;
 import com.smh.model.AllWomenResponse;
 import com.smh.model.PhfiDeliveryFormRequest;
@@ -32,6 +36,8 @@ import com.smh.model.PhfiRegistrationRequest;
 import com.smh.model.PhfiRegistrationResponse;
 import com.smh.model.PhfiVisitRequest;
 import com.smh.model.Response;
+import com.smh.model.UserRoleRequest;
+import com.smh.model.UserRoleResponse;
 import com.smh.service.RegistrationService;
 import com.smh.util.JsonUtil;
 import com.smh.util.PaginationUtil;
@@ -105,6 +111,7 @@ public class RegistrationController extends BaseController implements URLMapping
 			  						  Map model) {
 	    ModelAndView modelAndView = new ModelAndView(PHFI_REG_SEARCH);    
 	    PhfiRegistrationRequest phfiRegistrationRequest = new PhfiRegistrationRequest();
+	    session.setAttribute(Constant.PHFI_REQUEST, phfiRegistrationRequest);
 		try {
 			model.put("phfiRegistrationRequest", new PhfiRegistrationRequest());
 			phfiRegistrationRequest.setPageIndex(Constant.ONE);
@@ -163,7 +170,35 @@ public class RegistrationController extends BaseController implements URLMapping
 		return modelAndView;
 	  }
 	
-	
+	@RequestMapping(value = PHFI_REGISTER_WOMAN_PAGINATION, method = RequestMethod.POST)
+	public ModelAndView getPage(HttpSession session, @FormParam("pageNumber") final Integer pageNumber, @FormParam("totalRecords") final Integer totalRecords, Map model) {
+		ModelAndView modelAndView = new ModelAndView(PHFI_REG_SEARCH);
+		logger.info("Entering :: RegistrationController ::getPage method ");
+		PhfiRegistrationRequest phfiRegistrationRequest = (PhfiRegistrationRequest) session.getAttribute(Constant.PHFI_REQUEST);
+		try {
+			phfiRegistrationRequest.setPageIndex(pageNumber);
+			phfiRegistrationRequest.setNoOfRecords(totalRecords);
+			phfiRegistrationRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
+			PhfiRegistrationResponse phfiRegistrationResponse = registrationService.getRegistedWoman(phfiRegistrationRequest);
+			List<PhfiRegistrationRequest> phfiRegistrationRequests = new ArrayList<PhfiRegistrationRequest>();
+			if (phfiRegistrationResponse != null && !CollectionUtils.isEmpty(phfiRegistrationResponse.getPhfiRegistrationRequest())) {
+				phfiRegistrationRequests = phfiRegistrationResponse.getPhfiRegistrationRequest();
+				modelAndView = PaginationUtil.getPagenationModelSuccessive(modelAndView, pageNumber, phfiRegistrationResponse.getNoOfRecords());
+				model.put("totalCount", phfiRegistrationResponse.getNoOfRecords());
+				model.put("womanList", phfiRegistrationRequests);
+				model.put("phfiRegistrationRequest", phfiRegistrationRequest);
+				modelAndView.addObject("resultflag", true);
+				
+			}
+		} catch (Exception e) {
+			logger.error("Errorg :: RegistrationController ::getPage method ", e);
+			modelAndView.setViewName(INVALID_PAGE);
+		}
+		
+		logger.info("Exiting :: RegistrationController ::getPage method ");
+		return modelAndView;
+	}
+
 	
 	
 	  @RequestMapping(value = SHOW_PHFI_VISI_FORM, method = RequestMethod.GET)

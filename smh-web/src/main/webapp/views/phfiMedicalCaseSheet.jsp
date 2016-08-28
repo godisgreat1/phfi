@@ -84,28 +84,28 @@ td {
 										<td colspan="2" style=" text-align: center;">${medicalCaseSheet.trimester}&nbsp; :&nbsp; ${medicalCaseSheet.obstetricScore}</td>
 									</tr>
 									<tr style="height: 45px;">
-										<td colspan="4">&nbsp;&nbsp;System Generated Initial Assessment: ${medicalCaseSheet.intialAsses}</td>
+										<td colspan="4">&nbsp;&nbsp;System Generated Initial Assessment:&nbsp;${medicalCaseSheet.intialAsses}</td>
 									</tr>
 									<tr style="height: 45px;">
-										<td colspan="2">&nbsp;&nbsp;LMP :${medicalCaseSheet.lmp}</td>
-										<td colspan="2">&nbsp;&nbsp;EDD :${medicalCaseSheet.edd}</td>
+										<td colspan="2">&nbsp;&nbsp;LMP :&nbsp;${medicalCaseSheet.lmp}</td>
+										<td colspan="2">&nbsp;&nbsp;EDD :&nbsp;${medicalCaseSheet.edd}</td>
 									</tr>
 									<tr style="height: 45px;">
-										<td colspan="1">&nbsp;&nbsp;Name :<div class="womanName">${medicalCaseSheet.name}</div></td>
-										<td colspan="1">&nbsp;&nbsp;Age  :${medicalCaseSheet.age}</td>
+										<td colspan="1">&nbsp;&nbsp;Name :&nbsp;<div class="womanName" style="display: inline;">${medicalCaseSheet.name}</div></td>
+										<td colspan="1">&nbsp;&nbsp;Age  :&nbsp;${medicalCaseSheet.age}</td>
 										<%-- <td colspan="1">&nbsp;&nbsp;Years:${medicalCaseSheet.years}</td> --%>
-										<td colspan="1">&nbsp;&nbsp;WID  :${medicalCaseSheet.wid}</td>
+										<td colspan="1">&nbsp;&nbsp;WID  :&nbsp;${medicalCaseSheet.wid}</td>
 									</tr>
 									<tr style="height: 45px;">
-										<td colspan="1">&nbsp;&nbsp;Village :<div class="villageName">${medicalCaseSheet.villageName}</div></td>
-										<td colspan="1">&nbsp;&nbsp;Taluk :<div class="taluk">${medicalCaseSheet.takul}</div></td>
-										<td colspan="2">&nbsp;&nbsp;District :<div class="district">${medicalCaseSheet.distric}</div></td>
+										<td colspan="1">&nbsp;&nbsp;Village :&nbsp;<div class="villageName" style="display: inline;">${medicalCaseSheet.villageName}</div></td>
+										<td colspan="1">&nbsp;&nbsp;Taluk :&nbsp;<div class="taluk" style="display: inline;">${medicalCaseSheet.takul}</div></td>
+										<td colspan="2">&nbsp;&nbsp;District :&nbsp;<div class="district" style="display: inline;">${medicalCaseSheet.distric}</div></td>
 									</tr>
 									<tr style="height: 45px;">
-										<td colspan="4">&nbsp;&nbsp;Current Address :<div class="currentAddress">${medicalCaseSheet.currentAddress}</div></td>
+										<td colspan="4">&nbsp;&nbsp;Current Address :&nbsp;<div class="currentAddress" style="display: inline;">${medicalCaseSheet.currentAddress}</div></td>
 									</tr>
 									<tr style="height: 45px;">
-										<td colspan="4">&nbsp;&nbsp;Alternative Address :<div class="alternateAddress">${medicalCaseSheet.alternativeAddress}</div></td>
+										<td colspan="4">&nbsp;&nbsp;Alternative Address :&nbsp;<div class="alternateAddress" style="display: inline;">${medicalCaseSheet.alternativeAddress}</div></td>
 									</tr>
 									
 									<tr style="height: 45px;">
@@ -115,10 +115,13 @@ td {
 										<td colspan="4">&nbsp;&nbsp;Past History &nbsp;: &nbsp;${medicalCaseSheet.pastHistory}</td>
 									</tr>
 									<tr style="height: 45px;">
-										<td colspan="4">&nbsp;&nbsp;Current History:${medicalCaseSheet.currentHistory}</td>
+										<td colspan="4">&nbsp;&nbsp;Details of Delivery &nbsp;: &nbsp;${medicalCaseSheet.deliveryDetails}</td>
 									</tr>
 									<tr style="height: 45px;">
-										<td colspan="4">&nbsp;&nbsp;General Examination:${medicalCaseSheet.genralExamination}</td>
+										<td colspan="4">&nbsp;&nbsp;Current History:&nbsp;${medicalCaseSheet.currentHistory}</td>
+									</tr>
+									<tr style="height: 45px;">
+										<td colspan="4">&nbsp;&nbsp;General Examination:&nbsp;${medicalCaseSheet.genralExamination}</td>
 									</tr>
 									<tr style="height: 45px;">
 										<td colspan="4"> 
