@@ -34,6 +34,7 @@ public class Condition {
 	public static final String LATE_PREGNANCY_BLEEDING = "Late pregnancy bleeding for evaluation";
 	public static final String ABDOMINAL_PAIN_FOR_EVALUATION ="Abdominal pain for evaluation";
 	public static final String TUBERCULOSIS ="Tuberculosis";
+	public static final String TUBERCULOSIS1 ="Tuberculosis ?";
 	public static final String MALARIA ="Malaria";
 	public static final String FEVER_FOR_EVALUATION = "Fever for evaluation";
 	public static final String PPH="PPH";

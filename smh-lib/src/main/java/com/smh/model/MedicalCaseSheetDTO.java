@@ -43,6 +43,8 @@ public class MedicalCaseSheetDTO extends Response{
 	private String bp;
 	private List<String> labTest;
 	
+	private String deliveryDetails;
+	
 	/**
 	 * @return the visitDate
 	 */
@@ -318,6 +320,12 @@ public class MedicalCaseSheetDTO extends Response{
 	 */
 	public void setPastHistory(String pastHistory) {
 		this.pastHistory = pastHistory;
+	}
+	public String getDeliveryDetails() {
+		return deliveryDetails;
+	}
+	public void setDeliveryDetails(String deliveryDetails) {
+		this.deliveryDetails = deliveryDetails;
 	}
 	
 }

@@ -21,7 +21,7 @@ public interface Constant {
 
   public static final String MODEL_ATTRIBUTE_ENTITY_LIST_END_PAGE_NUM = "endEntityPage";
 
-  public static final Integer MAX_ENTITIES_PAGINATION_DISPLAY_SIZE = 100;
+  public static final Integer MAX_ENTITIES_PAGINATION_DISPLAY_SIZE = 10;
 
   public static final Integer MAX_ENTITY_DISPLAY_SIZE = 10;
 
@@ -145,7 +145,7 @@ public interface Constant {
   
   public static final String BEACON_LOCATION_MAP_REQUEST = "beaconLocationMapRequest";
   
-  public static final String PHFI_REQUEST = "beaconRequest";
+  public static final String PHFI_REQUEST = "phfiRegistrationRequest";
 
   public static final String UPDATE_ADMIN_USER_TEMPLATE = TEMPLATE_PATH + "user_update.vm";	
   
