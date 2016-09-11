@@ -184,15 +184,35 @@ public class ReportHandlerImpl implements ReportHandler{
 	 */
 	private String getObstetricScore(Registration registration) {
 		logger.info("Entering :: RegistrationHandlerImpl :: getObstetricScore method");
+		Delivery delivery = deleviryDao.getDeliveryDetailByWid(registration.getUid());
 		String obstetricScore="";
 		try {
-			int g =registration.getPregnancyCount();
-			int l = registration.getNoOfChildren();
-			int a = registration.getEarlyDelivery();//
+			int g =0;
+			int l =0;
+			int a =0;
+			if(null !=registration.getPregnancyCount()){
+				g = registration.getPregnancyCount();
+			}
+			if(null !=registration.getNoOfChildren()){
+				l = registration.getNoOfChildren();
+			}
+			if(null !=registration.getEarlyDelivery()){
+				a = registration.getEarlyDelivery();
+			}
 			int p = g-a-1;
 			if("Pregnant".equalsIgnoreCase(registration.getMaternityStatus())){
 				obstetricScore = "G"+g+"P"+p+"A"+a+"L"+l;
 			}else if("Postpartum".equalsIgnoreCase(registration.getMaternityStatus())){
+				if (null != delivery.getPregnancyLast() && "" != delivery.getPregnancyLast()){
+					if (Integer.parseInt(delivery.getPregnancyLast()) < 7) {
+						p =g-a-1;
+					}else if(Integer.parseInt(delivery.getPregnancyLast()) >= 7){
+						p=g-a;
+					}
+					if (Integer.parseInt(delivery.getPregnancyLast()) >= 7 && Constant.Yes.equalsIgnoreCase(delivery.getIsBabyAlive())) {
+						l = l+1;
+					}
+				}
 				obstetricScore = "P"+p+"A"+a+"L"+l;
 			}
 			
@@ -496,7 +516,7 @@ public class ReportHandlerImpl implements ReportHandler{
 				findings.append(symptom.get("PHRASES44"));
 				findings.append(", ");
 			}else*/
-			if(Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsTalking())){
+			if(Constant.Yes.equalsIgnoreCase(pregnancyVisit.getTalkingIrrelevantly())){
 				findings.append(symptom.get("PHRASES45"));
 				findings.append(", ");
 			}else{
@@ -556,8 +576,8 @@ public class ReportHandlerImpl implements ReportHandler{
 			
 			if ((Constant.Yes.equalsIgnoreCase(pregnancyVisit.getHaveFever()) || Constant.Yes.equalsIgnoreCase(pregnancyVisit.getHaveHeadaches()))){
 				if((Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFits()) || Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsTalking()))) {
-				clinicalAsses.add(Condition.CVT);
-				assesmentStatus.add(Condition.EMERGENCY);
+					clinicalAsses.add(Condition.CVT);
+					assesmentStatus.add(Condition.EMERGENCY);
 				}
 			}
 			
@@ -597,34 +617,40 @@ public class ReportHandlerImpl implements ReportHandler{
 				}
 			}
 			
+			boolean servAnemiaFailureEmer = false;
+			boolean servAnemiaFailureHigh = false;
 			
 			if (pregnancyVisit.getFirstHb() != "") {
-				int hb = Integer.parseInt(pregnancyVisit.getFirstHb());
+				double hb = Double.parseDouble(pregnancyVisit.getFirstHb());
 
-				if (hb > 11 && hb < 7) {
+				if (hb < 11 && hb > 7 && Constant.PALE.equalsIgnoreCase(pregnancyVisit.getLowerEyeColor())) {
 					clinicalAsses.add(Condition.ANAEMIA);
-
 					assesmentStatus.add(Condition.LOW);
 				}
 
-				if (Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeelTired()) || Constant.PALE.equalsIgnoreCase(pregnancyVisit.getLowerEyeColor()) || Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsAnkleDepression())){
+				if (Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeelTired()) || Constant.PALE.equalsIgnoreCase(pregnancyVisit.getLowerEyeColor())
+						|| Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsAnkleDepression())){
 						if(hb < 7 && Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsBreathless())){
-							clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-							assesmentStatus.add(Condition.EMERGENCY);
+							/*clinicalAsses.add(Condition.SEVERE_ANEMIA);
+							assesmentStatus.add(Condition.EMERGENCY);*/
+							servAnemiaFailureEmer = true;
 						}else if(Constant.COOKING.equalsIgnoreCase(pregnancyVisit.getWhenBreathless())|| Constant.Yes.equalsIgnoreCase(pregnancyVisit.getHaveCough())) {
-							clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-							assesmentStatus.add(Condition.EMERGENCY);
+							/*clinicalAsses.add(Condition.SEVERE_ANEMIA);
+							assesmentStatus.add(Condition.EMERGENCY);*/
+							servAnemiaFailureEmer = true;
 						}
 					}
 			}
 			
 			if (Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeelTired()) && Constant.PALE.equalsIgnoreCase(pregnancyVisit.getLowerEyeColor()) 
 					&& Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsAnkleDepression()) && Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsBreathless())){
-					clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-					assesmentStatus.add(Condition.EMERGENCY);
+					/*clinicalAsses.add(Condition.SEVERE_ANEMIA);
+					assesmentStatus.add(Condition.HIGH);*/
+				servAnemiaFailureHigh = true;
 				}else if(Constant.COOKING.equalsIgnoreCase(pregnancyVisit.getWhenBreathless())|| Constant.Yes.equalsIgnoreCase(pregnancyVisit.getHaveCough())) {
-					clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-					assesmentStatus.add(Condition.HIGH);
+					/*clinicalAsses.add(Condition.SEVERE_ANEMIA);
+					assesmentStatus.add(Condition.HIGH);*/
+					servAnemiaFailureHigh = true;
 			}
 			
 			
@@ -647,22 +673,43 @@ public class ReportHandlerImpl implements ReportHandler{
 				// high serverity
 			}
 			
-			if(Constant.LOWER.equalsIgnoreCase(pregnancyVisit.getWherePain()) && Constant.SPOTTING.equalsIgnoreCase(pregnancyVisit.getKindOfBleeding())){
-				clinicalAsses.add(Condition.ECTOPIC_PREGNANCY_OR_ABORTION);
-				assesmentStatus.add(Condition.HIGH);
-			}else if(Constant.PERIOD_LIKE.equalsIgnoreCase(pregnancyVisit.getKindOfBleeding()) && gestationalAge < Constant.FOURTEEN ){
+			if(Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsVaginalDischarge()) && Constant.No.equalsIgnoreCase(pregnancyVisit.getHaveFever()) && Constant.No.equalsIgnoreCase(pregnancyVisit.getIsAbdominalPain())){
+				clinicalAsses.add(Condition.RTI);
+				assesmentStatus.add(Condition.LOW);
+			}
+			
+			
+			
+			boolean isEctopicAbortion = false;
+			if(Constant.LOWER.equalsIgnoreCase(pregnancyVisit.getWherePain()) && Constant.SPOTTING.equalsIgnoreCase(pregnancyVisit.getKindOfBleeding())
+					&& gestationalAge < Constant.FOURTEEN ){
+				/*clinicalAsses.add(Condition.ECTOPIC_PREGNANCY_OR_ABORTION);
+				assesmentStatus.add(Condition.HIGH);*/
+			}else if(Constant.LOWER.equalsIgnoreCase(pregnancyVisit.getWherePain()) && Constant.PERIOD_LIKE.equalsIgnoreCase(pregnancyVisit.getKindOfBleeding()) && gestationalAge < Constant.FOURTEEN ){
+				/*clinicalAsses.add(Condition.ECTOPIC_PREGNANCY_OR_ABORTION);
+				assesmentStatus.add(Condition.HIGH);*/
+			}
+			
+			if(Constant.LOWER.equalsIgnoreCase(pregnancyVisit.getWherePain()) && Constant.SPOTTING.equalsIgnoreCase(pregnancyVisit.getKindOfBleeding())
+					&& gestationalAge < Constant.FOURTEEN  && Constant.Yes.equalsIgnoreCase(pregnancyVisit.getFeltGiddy())){
+				isEctopicAbortion = true;
+				/*clinicalAsses.add(Condition.ECTOPIC_PREGNANCY);
+				assesmentStatus.add(Condition.EMERGENCY);*/
+			}else if(Constant.LOWER.equalsIgnoreCase(pregnancyVisit.getWherePain()) && Constant.PERIOD_LIKE.equalsIgnoreCase(pregnancyVisit.getKindOfBleeding()) 
+					&& gestationalAge < Constant.FOURTEEN  && Constant.Yes.equalsIgnoreCase(pregnancyVisit.getFeltGiddy())){
+				isEctopicAbortion = true;
+				/*clinicalAsses.add(Condition.ECTOPIC_PREGNANCY);
+				assesmentStatus.add(Condition.EMERGENCY);*/
+			}
+			
+			if(isEctopicAbortion){
+				clinicalAsses.add(Condition.ECTOPIC_PREGNANCY);
+				assesmentStatus.add(Condition.EMERGENCY);
+			}else{
 				clinicalAsses.add(Condition.ECTOPIC_PREGNANCY_OR_ABORTION);
 				assesmentStatus.add(Condition.HIGH);
 			}
 			
-			if(Constant.LOWER.equalsIgnoreCase(pregnancyVisit.getWherePain()) && Constant.SPOTTING.equalsIgnoreCase(pregnancyVisit.getKindOfBleeding())){
-				clinicalAsses.add(Condition.ECTOPIC_PREGNANCY);
-				assesmentStatus.add(Condition.HIGH);
-			}else if(Constant.PERIOD_LIKE.equalsIgnoreCase(pregnancyVisit.getKindOfBleeding()) 
-					&& gestationalAge < Constant.FOURTEEN  && Constant.Yes.equalsIgnoreCase(pregnancyVisit.getFeltGiddy())){
-				clinicalAsses.add(Condition.ECTOPIC_PREGNANCY);
-				assesmentStatus.add(Condition.EMERGENCY);
-			}
 			
 			if(Constant.LOWER.equalsIgnoreCase(pregnancyVisit.getWherePain()) && Constant.SPOTTING.equalsIgnoreCase(pregnancyVisit.getKindOfBleeding())){
 				clinicalAsses.add(Condition.ABORTION);
@@ -760,20 +807,25 @@ public class ReportHandlerImpl implements ReportHandler{
 			}
 			
 			
-			if (Constant.Yes.equalsIgnoreCase(pregnancyVisit.getHaveFever())
-					&& Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverAssocated()) && Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverComeAndGo())
-					&& Constant.SPUTUM_TEST_POSITIVE.equalsIgnoreCase(pregnancyVisit.getFirstMalaria())) {
+			if (Constant.Yes.equalsIgnoreCase(pregnancyVisit.getHaveFever())){
+				if( Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverAssocated()) || Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverComeAndGo())){
+				  if(Constant.SPUTUM_TEST_POSITIVE.equalsIgnoreCase(pregnancyVisit.getFirstMalaria())) {
 				clinicalAsses.add(Condition.MALARIA);
 				assesmentStatus.add(Condition.HIGH);
+				  }
+				}
 				// servrity Low
 
 			}
-			if (Constant.Yes.equalsIgnoreCase(pregnancyVisit.getHaveFever())
-					&& Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverAssocated()) && Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverComeAndGo())
-					&& Constant.No.equalsIgnoreCase(pregnancyVisit.getFirstMalaria())) {
+			if (Constant.Yes.equalsIgnoreCase(pregnancyVisit.getHaveFever())){
+				if( Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverAssocated()) || Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverComeAndGo())){
+				 if(Constant.NOT_DONE.equalsIgnoreCase(pregnancyVisit.getMalaria())) {
 				clinicalAsses.add(Condition.MALARIA);
 				assesmentStatus.add(Condition.HIGH);
+				 }
 				// servrity Low
+				 
+				}
 			}
 			if (Constant.Yes.equalsIgnoreCase(pregnancyVisit.getHaveFever())
 					&& Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverAssocated()) && Constant.Yes.equalsIgnoreCase(pregnancyVisit.getIsFeverComeAndGo())
@@ -799,27 +851,36 @@ public class ReportHandlerImpl implements ReportHandler{
 			
 			
 			if (pregnancyVisit.getFirstRbs() != "") {
-				if (Integer.parseInt(pregnancyVisit.getFirstRbs()) > 140) {
+				if (Double.parseDouble(pregnancyVisit.getFirstRbs()) > 140) {
 					clinicalAsses.add(Condition.GESTATIONAL_DIABETES);
 
 					assesmentStatus.add(Condition.LOW);
 				}
 			}
-			if (pregnancyVisit.getFirstHb() != "") {
-				if (pregnancyVisit.getFirstHb() != ""
-						&& Integer.parseInt(pregnancyVisit.getFirstHb()) < 10) {
-					boolean isMore = true;
-					if (Integer.parseInt(pregnancyVisit.getFirstHb()) < Constant.SEVEN) {
-						clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-						assesmentStatus.add(Condition.HIGH);
-						isMore = false;
+			
+			if(servAnemiaFailureEmer == true){
+				clinicalAsses.add(Condition.SEVERE_ANEMIA);
+				assesmentStatus.add(Condition.EMERGENCY);
+			}else if(servAnemiaFailureHigh == true){
+				clinicalAsses.add(Condition.SEVERE_ANEMIA);
+				assesmentStatus.add(Condition.HIGH);
+			}else{
+				if (pregnancyVisit.getFirstHb() != "") {
+					if (pregnancyVisit.getFirstHb() != ""
+							&& Double.parseDouble(pregnancyVisit.getFirstHb()) < 10) {
+						boolean isMore = true;
+						if (Double.parseDouble(pregnancyVisit.getFirstHb()) < Constant.SEVEN) {
+							clinicalAsses.add(Condition.SEVERE_ANAEMIA);
+							assesmentStatus.add(Condition.HIGH);
+							isMore = false;
+						}
+						if (isMore) {
+							clinicalAsses.add(Condition.ANAEMIA);
+							assesmentStatus.add(Condition.LOW);
+						}
 					}
-					if (isMore) {
-						clinicalAsses.add(Condition.ANAEMIA);
-						assesmentStatus.add(Condition.LOW);
-					}
+	
 				}
-
 			}
 			if(Constant.YELLOW.equalsIgnoreCase(pregnancyVisit.getUpperEyeColor())){
 				clinicalAsses.add(Condition.ICTERUS_EVALUATION);
@@ -1035,7 +1096,7 @@ public class ReportHandlerImpl implements ReportHandler{
 				//TODO Nothing
 			}
 			//check tailkin illogical
-			if(Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsTalking())){
+			if(Constant.Yes.equalsIgnoreCase(postpartumVisit.getTalkingIrrelevantly())){
 				findings.append(symptom.get("PHRASES45"));
 				findings.append(", ");
 			}/*else
@@ -1123,11 +1184,15 @@ public class ReportHandlerImpl implements ReportHandler{
 				}
 			}
 			
-			String bp[] = postpartumVisit.getFirstBp().split("/");
+			
 			Boolean bpCheck =false;
-			if(bp.length ==2){
-				if(Integer.parseInt(bp[0]) > 160 && Integer.parseInt(bp[1]) > 110 ){
-					bpCheck =true;
+			String bp[] = null;
+			if(""!=postpartumVisit.getFirstBp() && null !=postpartumVisit.getFirstBp()){
+				 bp = postpartumVisit.getFirstBp().split("/");
+				if(bp.length ==2){
+					if(Integer.parseInt(bp[0]) > 160 && Integer.parseInt(bp[1]) > 110 ){
+						bpCheck =true;
+					}
 				}
 			}
 			
@@ -1158,37 +1223,39 @@ public class ReportHandlerImpl implements ReportHandler{
 					assesmentStatus.add(Condition.LOW);
 				}
 			}
-			
-			
+			boolean servAnemiaFailureEmer = false;
+			boolean servAnemiaFailureHigh = false;
 			if (postpartumVisit.getFirstHb() != "") {
-				int hb = Integer.parseInt(postpartumVisit.getFirstHb());
+				double hb = Double.parseDouble(postpartumVisit.getFirstHb());
 
-				if (hb > 11 && hb < 7) {
+				if (hb < 11 && hb > 7) {
 					clinicalAsses.add(Condition.ANAEMIA);
-
 					assesmentStatus.add(Condition.LOW);
 				}
 
 				if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeelTired()) || Constant.PALE.equalsIgnoreCase(postpartumVisit.getLowerEyeColor()) || Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsAnkleDepression())){
 						if(hb < 7 && Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsBreathless())){
-							clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-							assesmentStatus.add(Condition.EMERGENCY);
+							/*clinicalAsses.add(Condition.SEVERE_ANAEMIA);
+							assesmentStatus.add(Condition.EMERGENCY);*/
+							servAnemiaFailureEmer = true;
 						}else if(Constant.COOKING.equalsIgnoreCase(postpartumVisit.getWhenBreathless())|| Constant.Yes.equalsIgnoreCase(postpartumVisit.getHaveCough())) {
-							clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-							assesmentStatus.add(Condition.EMERGENCY);
+							/*clinicalAsses.add(Condition.SEVERE_ANAEMIA);
+							assesmentStatus.add(Condition.EMERGENCY);*/
+							servAnemiaFailureEmer= true;
 						}
 					}
 			}
 			
 			if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeelTired()) && Constant.PALE.equalsIgnoreCase(postpartumVisit.getLowerEyeColor()) 
 					&& Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsAnkleDepression()) && Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsBreathless())){
-					clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-					assesmentStatus.add(Condition.EMERGENCY);
+					/*clinicalAsses.add(Condition.SEVERE_ANAEMIA);
+					assesmentStatus.add(Condition.EMERGENCY);*/
+					servAnemiaFailureHigh = true;
 				}else if(Constant.COOKING.equalsIgnoreCase(postpartumVisit.getWhenBreathless())|| Constant.Yes.equalsIgnoreCase(postpartumVisit.getHaveCough())) {
-					clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-					assesmentStatus.add(Condition.HIGH);
+					/*clinicalAsses.add(Condition.SEVERE_ANAEMIA);
+					assesmentStatus.add(Condition.HIGH);*/
+					servAnemiaFailureHigh = true;
 			}
-			
 			
 			if(Constant.No.equalsIgnoreCase(postpartumVisit.getHaveFever()) && Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsBurningPain())){
 				clinicalAsses.add(Condition.UTI);
@@ -1209,6 +1276,18 @@ public class ReportHandlerImpl implements ReportHandler{
 				// high serverity
 			}
 			
+			if(Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsVaginalDischarge()) && Constant.No.equalsIgnoreCase(postpartumVisit.getHaveFever()) && Constant.No.equalsIgnoreCase(postpartumVisit.getIsAbdominalPain())){
+				clinicalAsses.add(Condition.RTI);
+				assesmentStatus.add(Condition.LOW);
+			}
+			if(Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsVaginalDischarge()) && Constant.No.equalsIgnoreCase(postpartumVisit.getHaveFever()) && Constant.No.equalsIgnoreCase(postpartumVisit.getTalkingIrrelevantly())){
+				clinicalAsses.add("Sepsis?");
+				assesmentStatus.add(Condition.HIGH);
+			}
+			if(Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsVaginalDischarge()) && Constant.No.equalsIgnoreCase(postpartumVisit.getIsAbdominalPain()) && Constant.No.equalsIgnoreCase(postpartumVisit.getTalkingIrrelevantly())){
+				clinicalAsses.add("Sepsis?");
+				assesmentStatus.add(Condition.HIGH);
+			}		
 						
 			if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsAbdominalPain())
 					&& Constant.No.equalsIgnoreCase(postpartumVisit.getIsBleeding())
@@ -1234,21 +1313,25 @@ public class ReportHandlerImpl implements ReportHandler{
 			}
 			
 			
-			if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getHaveFever())
-					&& Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeverAssocated()) && Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeverComeAndGo())
-					&& Constant.SPUTUM_TEST_POSITIVE.equalsIgnoreCase(postpartumVisit.getFirstMalaria())) {
-				clinicalAsses.add(Condition.MALARIA);
-				assesmentStatus.add(Condition.HIGH);
+			if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getHaveFever())){
+				if(Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeverAssocated()) || Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeverComeAndGo())){
+					if(Constant.SPUTUM_TEST_POSITIVE.equalsIgnoreCase(postpartumVisit.getFirstMalaria())) {
+						clinicalAsses.add(Condition.MALARIA);
+						assesmentStatus.add(Condition.HIGH);
 				// servrity Low
-
+					}else if(Constant.NOT_DONE.equalsIgnoreCase(postpartumVisit.getMalaria())){
+						clinicalAsses.add(Condition.MALARIA);
+						assesmentStatus.add(Condition.HIGH);
+					}
+				}
 			}
-			if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getHaveFever())
+			/*if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getHaveFever())
 					&& Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeverAssocated()) && Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeverComeAndGo())
 					&& Constant.No.equalsIgnoreCase(postpartumVisit.getFirstMalaria())) {
-				clinicalAsses.add(Condition.MALARIA);
-				assesmentStatus.add(Condition.HIGH);
+					clinicalAsses.add(Condition.MALARIA);
+					assesmentStatus.add(Condition.HIGH);
 				// servrity Low
-			}
+			}*/
 			if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getHaveFever())
 					&& Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeverAssocated()) && Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsFeverComeAndGo())
 					&& Constant.SPUTUM_TEST_POSITIVE.equalsIgnoreCase(postpartumVisit.getFirstMalaria())) {
@@ -1309,20 +1392,26 @@ public class ReportHandlerImpl implements ReportHandler{
 				assesmentStatus.add(Condition.LOW);
 				//servrity low
 			}
-			
-			if(postpartumVisit.getFirstHb() !="" && Integer.parseInt(postpartumVisit.getFirstHb()) < 10 ){
-				boolean isMore =true;
-				if(postpartumVisit.getFirstHb() !="" && Integer.parseInt(postpartumVisit.getFirstHb()) < Constant.SEVEN ){
-					clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-					assesmentStatus.add(Condition.HIGH);
-					isMore = false;
-				}
-				if(isMore){
-					clinicalAsses.add(Condition.ANAEMIA);
-					assesmentStatus.add(Condition.LOW);
+			if(servAnemiaFailureEmer == true){
+				clinicalAsses.add(Condition.SEVERE_ANEMIA);
+				assesmentStatus.add(Condition.EMERGENCY);
+			}else if(servAnemiaFailureHigh == true){
+				clinicalAsses.add(Condition.SEVERE_ANEMIA);
+				assesmentStatus.add(Condition.HIGH);
+			}else{
+				if(postpartumVisit.getFirstHb() !="" && Double.parseDouble(postpartumVisit.getFirstHb()) < 10 ){
+					boolean isMore =true;
+					if(postpartumVisit.getFirstHb() !="" && Double.parseDouble(postpartumVisit.getFirstHb()) < Constant.SEVEN ){
+						clinicalAsses.add(Condition.SEVERE_ANAEMIA);
+						assesmentStatus.add(Condition.HIGH);
+						isMore = false;
+					}
+					if(isMore){
+						clinicalAsses.add(Condition.ANAEMIA);
+						assesmentStatus.add(Condition.LOW);
+					}
 				}
 			}
-			
 			
 			if(Constant.SPUTUM_TEST_POSITIVE.equalsIgnoreCase(postpartumVisit.getSputumTest())){
 				clinicalAsses.add(Condition.TUBERCULOSIS);
@@ -1856,6 +1945,7 @@ public class ReportHandlerImpl implements ReportHandler{
 						response.setWeight(getWeightDetails(registration));
 					}
 						response.setLabTest(getLabTestDetails(registration));
+						if(findingAssessVisit.length>=7)
 						response.setServerity(findingAssessVisit[8]);
 						
 					}
@@ -1889,7 +1979,7 @@ public class ReportHandlerImpl implements ReportHandler{
 							visitDate = postpartumVistsDate;
 						}
 					} catch (ParseException e) {
-						logger.error("Error :: RegistrationHandlerImpl :: getFindings method", e);
+						logger.error("Error :: RegistrationHandlerImpl :: getCashSheetReport method", e);
 					}
 				}else if(StringUtil.isListNotNullNEmpty(postpartumList)){
 					visitType =Constant.POSTPARTUM;
@@ -1918,6 +2008,11 @@ public class ReportHandlerImpl implements ReportHandler{
 					trimester ="Third Trimester";
 				}else{
 					
+				}
+				Delivery delivery = deleviryDao.getDeliveryDetailByWid(registration.getUid());
+				
+				if(null != delivery || Constant.POSTPARTUM.equalsIgnoreCase(registration.getMaternityStatus())){
+					trimester = "Postpartum";
 				}
 			
 				response.setName(registration.getWomenFirstName()+" "+registration.getWomenSurname());
@@ -1954,8 +2049,7 @@ public class ReportHandlerImpl implements ReportHandler{
 
 	private String getDeliveryDetails(Registration registration) {
 		String deliveryDetails = "Not found";
-		Delivery delivery = deleviryDao.getDeliveryDetailByWid(registration
-				.getUid());
+		Delivery delivery = deleviryDao.getDeliveryDetailByWid(registration.getUid());
 		if (null != delivery) {
 			String babyStatus = "";
 			if (Constant.Yes.equalsIgnoreCase(delivery.getIsBabyAlive())) {
@@ -1964,23 +2058,14 @@ public class ReportHandlerImpl implements ReportHandler{
 			if (Constant.No.equalsIgnoreCase(delivery.getIsBabyAlive())) {
 				babyStatus = "dead";
 			}
-			if (null != delivery.getPregnancyLast() && "" != delivery.getPregnancyLast())
-				if (Integer.parseInt(delivery.getPregnancyLast()) >= 7) {
-					deliveryDetails = "Delivered a <b>" + babyStatus
-							+ "</b> baby weighing <b>" + delivery.getBabyWeight()
-							+ "kg </b> by <b>" + delivery.getDeliveryType()
-							+ "</b> at <b>" + delivery.getDeliveryPlace()
-							+ "</b> with the help of a <b>"
-							+ delivery.getDeliveryConductedBy() + "</b> on <b>"
-							+ delivery.getDeliveryDate() + "</b>";
-				}
-			if (Integer.parseInt(delivery.getPregnancyLast()) < 7) {
-				deliveryDetails = "Aborted the foetus at <b>"
-						+ delivery.getDeliveryPlace()
-						+ "</b> with the help of a <b>"
-						+ delivery.getDeliveryConductedBy() + "</b> on <b>"
-						+ delivery.getDeliveryDate() + "</b>";
-			}
+			deliveryDetails ="Delivered a <b>" + babyStatus
+					+ "</b> baby, weighing <b>" + delivery.getBabyWeight()
+					+ "kg </b>, on <b>"
+					+ delivery.getDeliveryDate() + "</b>. Type of delivery: <b>" + delivery.getDeliveryType()
+					+ "</b>. Place: <b>" + delivery.getDeliveryPlace()
+					+ "</b>. Conducted by: <b>"
+					+ delivery.getDeliveryConductedBy() + "</b>";
+					
 		}
 		return deliveryDetails;
 	}
@@ -2337,8 +2422,23 @@ public class ReportHandlerImpl implements ReportHandler{
 				sb.append("h/o previous lscs"+", ");
 			}}
 			if(Constant.Yes.equalsIgnoreCase(registration.getBleedexcessively())){
-				sb.append("h/o previous PPH.");
+				sb.append("h/o previous PPH."+", ");
 			}
+			
+			if(Constant.Yes.equalsIgnoreCase(registration.getBreathlessness())){
+				sb.append("h/o breathlessness in last pregnancy"+", ");
+			}
+			if(Constant.Yes.equalsIgnoreCase(registration.getSeverepallor())){
+				sb.append("h/o pallor in last pregnancy"+", ");
+			}
+			if(null != registration.getEarlyDelivery()){
+				if(registration.getEarlyDelivery() >=1){
+					sb.append("Bad obstetric history");
+					
+				}
+			}
+			
+			
 		} catch (Exception e) {
 			logger.error("Error :: reporthandlerimpl : getpastHistory method"+e);
 		}
@@ -2430,10 +2530,28 @@ public class ReportHandlerImpl implements ReportHandler{
 	 * @return
 	 */
 	private int getP(Registration registration) {
-		int g =registration.getPregnancyCount();
-		int a = registration.getEarlyDelivery();//g-1;// total didnit cross 7 month
+		int g =0;
+		int a = 0;//g-1;// total didnit cross 7 month
+	
+		Delivery delivery = deleviryDao.getDeliveryDetailByWid(registration.getUid());
+		if(null !=registration.getPregnancyCount()){
+			g = registration.getPregnancyCount();
+		}
+		if(null !=registration.getEarlyDelivery()){
+			a = registration.getEarlyDelivery();
+		}
 		int p = g-a-1;
-		return p;
+		 if("Postpartum".equalsIgnoreCase(registration.getMaternityStatus())){
+			if (null != delivery.getPregnancyLast() && "" != delivery.getPregnancyLast()){
+				if (Integer.parseInt(delivery.getPregnancyLast()) < 7) {
+					p =g-a-1;
+				}else if(Integer.parseInt(delivery.getPregnancyLast()) >= 7){
+					p=g-a;
+				}
+			}
+		 }
+		return p;	
+		
 	}
 
 	/**

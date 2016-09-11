@@ -126,7 +126,7 @@ function setAskTheWoman(){
 }
 
 function setObserve(){
-	setLable('confirmOutOFBreath', $('input[name=outOfBreath]:checked').val());
+	setLable('confirmOutOFBreath', $('input[name=isoutOfBreath]:checked').val());
 	setLable('confirmTakingIrrelevantly',$('input[name=isTalking]:checked').val());
 	setLable('confirmUpperEye', $('input[name=upperEyeColor]:checked').val());
 	setLable('confirmLowerEye', $('input[name=lowerEyeColor]:checked').val());
@@ -194,8 +194,8 @@ function setTestResult(){
 	setLable('confirmMalariaStatus',$('input[name=malaria]:checked').val());
 	setLable('confirmFirstMalaria', get('firstMalaria').value.trim());
 	setLable('confirmFirstMalariaDate', get('malariaDateOne').value.trim());
-	setLable('confirmSecMalaria', get('secMalaria').value.trim());
-	setLable('confirmSecMalariaDate', get('malariaDateSec').value.trim());
+	/*setLable('confirmSecMalaria', get('secMalaria').value.trim());
+	setLable('confirmSecMalariaDate', get('malariaDateSec').value.trim());*/
 	
 	setLable('confirmSputumStatus',$('input[name=sputum]:checked').val());
 	setLable('confirmFirstSputum', get('sputumTest').value.trim());

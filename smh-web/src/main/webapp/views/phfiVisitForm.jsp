@@ -1269,10 +1269,21 @@
 												<fieldset class="col-sm-12" id="malariaId">
 														<fieldset class="col-sm-3">
 															<label><spring:message code="com.phfi.aTestForMalaria" /><span class="required-field">*</span></label>
-															<form:input cssClass="form-control" path="firstMalaria"
+															<%-- <form:input cssClass="form-control" path="firstMalaria"
 																id="firstMalaria" maxlength="50"
 																onblur="return clientValidation('firstMalaria', 'required','firstMalariaErrorId')" />
-															<div class="discriptionErrorMsg">
+
+ --%>														<form:select path="firstMalaria" id="firstMalaria" cssClass="form-control">
+																<form:option value="">.:Please Select:.</form:option>
+																<form:option value="+ve"><spring:message code="com.phfi.+ve" />	</form:option>
+																<form:option value="-ve"><spring:message code="com.phfi.-ve" /></form:option>
+															</form:select>
+
+
+
+
+
+														<div class="discriptionErrorMsg">
 																<span id="firstMalariaErrorId" class="red-error">&nbsp;</span>
 															</div>
 														</fieldset>
@@ -1289,7 +1300,7 @@
 																<span id="malariaDateOneErrorDiv" class="red-error">&nbsp;</span>
 															</div>
 														</fieldset>
-														<fieldset class="col-sm-3">
+														<%-- <fieldset class="col-sm-3">
 															<label><spring:message code="com.phfi.bTestForMalaria" /><span class="required-field">*</span></label>
 															<form:input cssClass="form-control" path="secMalaria"
 																id="secMalaria" maxlength="50"
@@ -1310,7 +1321,7 @@
 															<div class="discriptionErrorMsg">
 																<span id="malariaDateSecErrorDiv" class="red-error">&nbsp;</span>
 															</div>
-														</fieldset>
+														</fieldset> --%>
 												</fieldset>
 												<fieldset class="col-sm-12">
 													<fieldset class="col-sm-6">
@@ -1692,12 +1703,6 @@
 																	<td><div id="confirmFirstMalaria"></div></td>
 																	<td><spring:message code="com.phfi.firstDate" /></td>
 																	<td><div id="confirmFirstMalariaDate"></div></td>
-																</tr>
-																<tr>
-																	<td><spring:message code="com.phfi.secondMalariaTest" /></td>
-																	<td><div id="confirmSecMalaria"></div></td>
-																	<td> <spring:message code="com.phfi.secondDate" /></td>
-																	<td><div id="confirmSecMalariaDate"></div></td>
 																</tr>
 																<tr>
 																	<td><br/><spring:message code="com.phfi.sputumTestStatus" /></td>

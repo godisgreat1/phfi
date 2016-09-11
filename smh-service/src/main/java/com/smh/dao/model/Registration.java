@@ -167,16 +167,16 @@ public class Registration implements Serializable{
 	private String problemDesc;
     
     @Column(name = "PREGNANCY_COUNT")
-	private Integer pregnancyCount;
+	private Integer pregnancyCount=0;
     
     @Column(name = "NO_OF_CHILDREN")
-	private Integer noOfChildren;
+	private Integer noOfChildren=0;
     
     @Column(name = "RECENT_DELIVERY")
 	private String dateOfRecentDelivery;
     
     @Column(name = "EARLY_DELIVERY")
-	private Integer earlyDelivery;
+	private Integer earlyDelivery=0;
     
     @Column(name = "CAESAREAN")
 	private Integer caesarean;

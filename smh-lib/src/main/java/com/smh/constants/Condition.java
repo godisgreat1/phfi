@@ -47,6 +47,7 @@ public class Condition {
 	public static final String ANAEMIA ="Anaemia";
 	public static final String SEVERE_ANAEMIA = "Severe anaemia";
 	public static final String ICTERUS_EVALUATION = "Icterus for evaluation";
+	public static final String RTI = " ?RTI";
 	
 	//constant for predsiposing factor
 	
@@ -64,9 +65,9 @@ public class Condition {
 	public static final String PASTHISTORY4 = "Anaemia";
 	public static final String PASTHISTORY5 = "Thyroid";
 	
-	public static final String HIGH = "Risk";
-	public static final String LOW = "No abnormality detected";
-	public static final String EMERGENCY = "High Risk";
+	public static final String HIGH = "High Risk";
+	public static final String LOW = "Risk";
+	public static final String EMERGENCY = "Very High Risk";
 	
 	
 	

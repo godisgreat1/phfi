@@ -444,11 +444,11 @@
 													</fieldset>
 													<fieldset class="col-sm-6">
 														<input type="radio" id="wherePain" name="wherePain"
-															value="Yes"><spring:message code="com.phfi.upperAbdomen" />&nbsp;
+															value="Upper abdomen"><spring:message code="com.phfi.upperAbdomen" />&nbsp;
 															<input type="radio" id="wherePain" name="wherePain"
-															value="Yes"><spring:message code="com.phfi.lowerAbdomen" />&nbsp;
+															value="Lower abdomen"><spring:message code="com.phfi.lowerAbdomen" />&nbsp;
 															 <input type="radio"
-															id="wherePain" name="wherePain" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.allOver" />
+															id="wherePain" name="wherePain" value="All over"  >&nbsp;&nbsp;<spring:message code="com.phfi.allOver" />
 														<div class="discriptionErrorMsg">
 															<span id="wherePainError" class="red-error">&nbsp;</span>
 														</div>
@@ -528,14 +528,23 @@
 															<label><spring:message code="com.phfi.bleedingIncreased" /><span class="required-field">*</span>
 															</label>
 														</fieldset>
-														<fieldset class="col-sm-3">
+														<%-- <fieldset class="col-sm-3">
 															<form:input cssClass="form-control" path="hasBleedingIncrease"
 																id="hasBleedingIncrease"
 																onblur="return clientValidation('noDayAfterDel', 'numericField','hasBleedingIncreaseErrorDiv');" />
 															<div class="discriptionErrorMsg">
 																<span id="hasBleedingIncreaseErrorDiv" class="red-error">&nbsp;</span>
 															</div>
+														</fieldset> --%>
+														<fieldset class="col-sm-3">
+															<input type="radio" id="hasBleedingIncrease" name="hasBleedingIncrease"
+															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="hasBleedingIncrease" name="hasBleedingIncrease" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+														<div class="discriptionErrorMsg">
+															<span id="hasBleedingIncreaseErrorDiv" class="red-error">&nbsp;</span>
+														</div>
 														</fieldset>
+														
 													</fieldset>
 
 												</fieldset>
@@ -895,8 +904,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="malaria" name="malaria"
-															value="Yes" onclick="showMalaria()"><spring:message code="com.phfi.done" />&nbsp; <input type="radio"
-															id="malaria" name="malaria" value="No" onclick="hideMalaria()"  >&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
+															value="Done" onclick="showMalaria()"><spring:message code="com.phfi.done" />&nbsp; <input type="radio"
+															id="malaria" name="malaria" value="Not Done" onclick="hideMalaria()"  >&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
 														<div class="discriptionErrorMsg">
 															<span id="malariaErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -905,9 +914,11 @@
 												<fieldset class="col-sm-12" id="malariaId">
 														<fieldset class="col-sm-3">
 															<label><spring:message code="com.phfi.aTestForMalaria" /><span class="required-field">*</span></label>
-															<form:input cssClass="form-control" path="firstMalaria"
-																id="firstMalaria" maxlength="50"
-																onblur="return clientValidation('firstMalaria', 'numericField','firstMalariaErrorId')" />
+															<form:select path="firstMalaria" id="firstMalaria" cssClass="form-control">
+																<form:option value="">.:Please Select:.</form:option>
+																<form:option value="+ve"><spring:message code="com.phfi.+ve" />	</form:option>
+																<form:option value="-ve"><spring:message code="com.phfi.-ve" /></form:option>
+															</form:select>
 															<div class="discriptionErrorMsg">
 																<span id="firstMalariaErrorId" class="red-error">&nbsp;</span>
 															</div>
@@ -925,7 +936,7 @@
 																<span id="malariaDateOneErrorDiv" class="red-error">&nbsp;</span>
 															</div>
 														</fieldset>
-														<fieldset class="col-sm-3">
+													<%-- 	<fieldset class="col-sm-3">
 															<label><spring:message code="com.phfi.bTestForMalaria" /><span class="required-field">*</span></label>
 															<form:input cssClass="form-control" path="secMalaria"
 																id="secMalaria" maxlength="50"
@@ -946,7 +957,7 @@
 															<div class="discriptionErrorMsg">
 																<span id="malariaDateSecErrorDiv" class="red-error">&nbsp;</span>
 															</div>
-														</fieldset>
+														</fieldset> --%>
 												</fieldset>
 												<fieldset class="col-sm-12">
 													<fieldset class="col-sm-6">
@@ -955,8 +966,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="sputum" name="sputum"
-															value="Yes" onclick="showSputum()"><spring:message code="com.phfi.done" />&nbsp; <input type="radio"
-															id="sputum" name="sputum" value="No" onclick="hideSputum()"  >&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
+															value="Done" onclick="showSputum()"><spring:message code="com.phfi.done" />&nbsp; <input type="radio"
+															id="sputum" name="sputum" value="Not Done" onclick="hideSputum()"  >&nbsp;&nbsp;<spring:message code="com.phfi.notDone" />
 														<div class="discriptionErrorMsg">
 															<span id="sputumErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -1357,13 +1368,6 @@
 																	<td><div id="confirmFirstMalaria"></div></td>
 																	<td><spring:message code="com.phfi.firstDate" /></td>
 																	<td><div id="confirmFirstMalariaDate"></div></td>
-																</tr>
-																<tr>
-																	<td><spring:message code="com.phfi.secondMalariaTest" /></td>
-																	<td><div id="confirmSecMalaria"></div></td>
-																	<td><spring:message code="com.phfi.secondDate" /> </td>
-																	<td><div id="confirmSecMalariaDate"></div></td>
-																	
 																</tr>
 																<tr>
 																	<td><spring:message code="com.phfi.sputumTestStatus" /></td>
