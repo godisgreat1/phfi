@@ -221,10 +221,10 @@ public class RegistrationDaoImpl implements RegistrationDao{
 		JPAQuery query = new JPAQuery(entityManager);
 		QRegistration registration = QRegistration.registration;
 		List<Tuple> tupleList = query.from(registration).where(registration.uid.eq(wid)).list(
-				registration.womenFirstName, registration.womenSurname);
+				registration.womenFirstName,registration.womenHusbandName, registration.womenSurname);
 		for (Tuple tuple : tupleList) {
 
-			nameList.add(tuple.get(registration.womenFirstName)+" "+tuple.get(registration.womenSurname));
+			nameList.add(tuple.get(registration.womenFirstName)+" "+tuple.get(registration.womenHusbandName)+" "+tuple.get(registration.womenSurname));
 		}
 		return nameList;
 	}
