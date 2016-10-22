@@ -189,6 +189,11 @@ public class UserMgmtFileUtil {
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		c1.setBackgroundColor(BaseColor.GRAY);
 		table.addCell(c1);
+		table.addCell(c1);
+		table.addCell(c1);
+		table.addCell(c1);
+		table.addCell(c1);
+		table.addCell(c1);
 
 		for (AdminUserRequest adminUserRequest : adminUserRequests) {
 			int j = 1;

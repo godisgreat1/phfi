@@ -728,7 +728,7 @@
 														<fieldset class="col-sm-4">
 															<label class="control-label"><spring:message code="com.phfi.caste" /><span
 																class="required-field">*</span></label>
-															<form:input cssClass="form-control" path="caste"
+															<form:input cssClass="form-control myclass" path="caste"
 																id="caste"
 																onblur="return clientValidation('caste', 'alphaField','casteErrordiv');" />
 															<div class="discriptionErrorMsg">

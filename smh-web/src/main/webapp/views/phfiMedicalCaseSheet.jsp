@@ -62,6 +62,8 @@ td {
 					</div>
 					<div class="tab-header-container active-background">
 						<a class="pull-right" style="cursor: pointer;" id="export-to-pdf">Export To PDF</a>
+						<%-- <input type="submit" id="buttonCreate" class="button" value="Download" style="height: 25px" onclick="document.location.href='getCaseSheetDownload?wid='+${medicalCaseSheet.wid};">
+						 --%>
 					</div>
 					<hr/>
 					<!-- Breadcrumb End -->
@@ -137,7 +139,7 @@ td {
 										<td colspan="1">&nbsp;&nbsp;Lab Tests:</td>
 										<td colspan="3">
 										<c:forEach items="${fn:split(medicalCaseSheet.labTest,',')}" var="labTest">
-										${fn:replace(fn:replace(labTest,'[[',''),']]','')} <br>
+										${fn:replace(fn:replace(labTest,'[[',''),']]','')}
 									
 									</c:forEach>
 									</td>
@@ -191,93 +193,7 @@ td {
 			doc.save('Case-Sheet-Report.pdf');				
 		});
 	});
-		
-		/* var pdf = new jsPDF('l', 'pt', 'letter');
-		
-		pdf.cellInitialize();
-		
-		pdf.setFontSize(10);
-		
-		pdf.text(350, 40, "Medical Case Sheet for the Doctor");
-		pdf.setLineWidth(1);
-		pdf.line(700, 60, 80, 60); // horizontal line (width, x, y, scale)
-		
-		var text = "";
-		
-	    $.each( $('#report-tbl tr'), function (i, row){
-	        $.each( $(row).find("td, th"), function(j, cell){
-        		var width = 80;
-        		var height = 20;
-	            var txt = $(cell).text().trim() || " ";
-	            if(j == 0) {
-	            	width = 700;
-	            	pdf.cell(20, 100, width, height, txt, i);		 //(,,,height,text,)
-	            } else if(j == 1 || j == 2) {
-	            	text += txt;
-	            	if(j == 2) {
-		            	width = 350;
-		            	pdf.cell(20, 100, width, height, text, i);		 //(,,,height,text,)
-		            } 
-	            } else if(j == 4) {
-	            	width = 140;
-	            	pdf.cell(20, 100, width, height, txt, i);		 //(,,,height,text,)
-	            } else if(i == 10) {
-	            	height = 50;
-	            	pdf.cell(20, 100, width, height, txt, i);		 //(,,,height,text,)
-	            }
-	        });
-	    });
-
-	    pdf.save('Case-Sheet-Report.pdf');
-	    
-	}); */
-	
-		/* function downloadToPDF(fileName) {
-		
-			var doc = new jsPDF('l', 'pt', 'letter');
-
-			doc.setFontSize(18);
-			doc.text(250, 40, "Medical Case Sheet");
-			doc.setLineWidth(0.5);
-			doc.line(710, 60, 80, 60); // horizontal line
-			
-			doc.addHTML($('#report-tbl')[0], function () {
-				doc.save(fileName + ".pdf");				
-			});
-			
-		} */
-		
-		/* $(document).on("click", "#export-to-pdf", function () { 
-			
-			var doc = new jsPDF('l', 'pt', 'a4');
-			doc.setFontSize(18);
-			doc.text(250, 40, "Medical Case Sheet");
-			doc.setLineWidth(0.5);
-			doc.line(710, 60, 80, 60); // horizontal line
-			
-			specialElementHandlers = {
-		        '#bypassme': function (element, renderer) {
-		            return true
-		        }
-		    };	
-		
-			var clonedDivObj = $('#report-tbl').clone();
-			
-			clonedDivObj.attr('id','pdf-dl-div');
-			
-			$('#exp-id').append(clonedDivObj);
-			
-			doc.fromHTML($('#pdf-dl-div')[0], 80, 80, {
-				'width': 900, 
-				'elementHandlers': specialElementHandlers
-			});
-			
-			doc.save("Report.pdf");
-
-			$('#pdf-dl-div').remove();
-			
-		}); */
-		
+				
 		$(document).ready(function(){
 			$('.womanName').each(function() {  $(this).text(decodeURIComponent($(this).text()));  });
 			$('.villageName').each(function() {  $(this).text(decodeURIComponent($(this).text()));  });

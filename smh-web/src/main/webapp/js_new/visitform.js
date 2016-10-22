@@ -107,6 +107,16 @@ function setAshaInfo(){
 
 function setAskTheWoman(){
 	setLable('confirmHaveFeer', $('input[name=haveFever]:checked').val());
+	
+	setLable('confirmChillsAndShivering', $('input[name=isFeverAssocated]:checked').val());
+	setLable('confirmFeverComeAndGo', $('input[name=isFeverComeAndGo]:checked').val());
+	setLable('confirmFeelTired', $('input[name=isFeelTired]:checked').val());
+	
+	setLable('confirmWhenFeelBreathless', $('input[name=whenBreathless]:checked').val());
+	setLable('confirmHowLongHadCough', $('input[name=howLongHaveCough]:checked').val());
+	setLable('confirmWhereItPain', $('input[name=wherePain]:checked').val());
+	setLable('confirmKindOfBleeding', $('input[name=kindOfBleeding]:checked').val());
+	
 	setLable('confirmHadFit', $('input[name=isFits]:checked').val());
 	setLable('confirmLostConsciousness', $('input[name=isConsciousness]:checked').val());
 	setLable('confirmFeltGiddy', $('input[name=feltGiddy]:checked').val());
@@ -129,8 +139,8 @@ function setAskTheWoman(){
 function setObserve(){
 	setLable('confirmOutOFBreath',$('input[name=isoutOfBreath]:checked').val());
 	setLable('confirmTakingIrrelevantly',$('input[name=isTalking]:checked').val());
-	setLable('confirmUpperEye', $('input[name=UpperEyeColor]:checked').val());
-	setLable('confirmLowerEye',$('input[name=LowerEyeColor]:checked').val());
+	setLable('confirmUpperEye', $('input[name=upperEyeColor]:checked').val());
+	setLable('confirmLowerEye',$('input[name=lowerEyeColor]:checked').val());
 	setLable('confirmHisFeet',$('input[name=isAnkleDepression]:checked').val());
 	setLable('confirmFace',$('input[name=isEyeSwelling]:checked').val());
 	return true;

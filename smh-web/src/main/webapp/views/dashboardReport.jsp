@@ -49,7 +49,7 @@
 							<input type="submit" id="buttonCreate" class="button"  value="Doctor Postpartum Report" style="height: 25px;" onclick="document.location.href='get-doctor-ratified-reports?maternityStatus=Postpartum';">
 							<input type="submit" id="buttonCreate" class="button"  value="Asha Pregnant Report" style="height: 25px;" onclick="document.location.href='get-asha-feedback-reports?maternityStatus=Pregnant';">
 							<input type="submit" id="buttonCreate" class="button"  value="Asha Postpartum Report" style="height: 25px;" onclick="document.location.href='get-asha-feedback-reports?maternityStatus=Postpartum';">
-							<input type="submit" id="buttonCreate" class="button"  value="Doctor Retify Report" style="height: 25px" onclick="document.location.href='getDoctorFormReport';">
+							<input type="submit" id="buttonCreate" class="button"  value="Doctor's Assessment" style="height: 25px" onclick="document.location.href='getDoctorFormReport';">
 							</p></td>
 						</tr>
 						

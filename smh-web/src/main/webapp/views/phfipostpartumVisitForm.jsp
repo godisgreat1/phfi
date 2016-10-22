@@ -297,8 +297,8 @@
 													</fieldset>
 													<fieldset class="col-sm-3">
 														<input type="radio" id="haveBlurredVision" name="haveBlurredVision"
-															value="Yes" onclick="showHavePain()"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
-															id="haveBlurredVision" name="haveBlurredVision" value="No" onclick="hideHavePain()"  >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
+															value="Yes"><spring:message code="com.phfi.yes" />&nbsp; <input type="radio"
+															id="haveBlurredVision" name="haveBlurredVision" value="No" >&nbsp;&nbsp;<spring:message code="com.phfi.no" />
 														<div class="discriptionErrorMsg">
 															<span id="haveBlurredVisionErrorDiv" class="red-error">&nbsp;</span>
 														</div>
@@ -418,8 +418,8 @@
 													</fieldset>
 													<fieldset class="col-sm-6">
 														<input type="radio" id="howLongHaveCough" name="howLongHaveCough"
-															value="Yes"><spring:message code="com.phfi.lessThanThreeWeeks" />&nbsp; <input type="radio"
-															id="howLongHaveCough" name="howLongHaveCough" value="No"  >&nbsp;&nbsp;<spring:message code="com.phfi.moreThanThreeWeeks" />				<div class="discriptionErrorMsg">
+															value="less than three weeks"><spring:message code="com.phfi.lessThanThreeWeeks" />&nbsp; <input type="radio"
+															id="howLongHaveCough" name="howLongHaveCough" value="more than three weeks"  >&nbsp;&nbsp;<spring:message code="com.phfi.moreThanThreeWeeks" />				<div class="discriptionErrorMsg">
 															<span id="diabetes" class="red-error">&nbsp;</span>
 														</div>
 													</fieldset>
@@ -1124,6 +1124,14 @@
 																	<td ><div id="confirmHaveFeer"></div></td>
 																</tr>
 																<tr>
+																	<td style="min-width: 350px"><spring:message code="com.phfi.feverAssociatedWithChillsAndShivering" /></td>
+																	<td><div id="confirmChillsAndShivering"></div></td>
+																</tr>
+																<tr>
+																	<td style="min-width: 350px"><spring:message code="com.phfi.feverComeAndGo" /></td>
+																	<td><div id="confirmFeverComeAndGo"></div></td>
+																</tr>
+																<tr>
 																	<td style="min-width: 328px"><spring:message code="com.phfi.hadFits" /></td>
 																	<td><div id="confirmHadFit"></div></td>
 																</tr>
@@ -1144,20 +1152,40 @@
 																	<td><div id="confirmBlurreVission"></div></td>
 																</tr>
 																<tr>
+																	<td style="min-width: 328px"><spring:message code="com.phfi.haveDifficultyInFeedingTheBaby" /></td>
+																	<td><div id="confirmDifficultyInFeedingTheBaby"></div></td>
+																</tr>
+																<tr>
+																	<td style="min-width: 328px"><spring:message code="com.phfi.havePainAndRednessInBreast" /></td>
+																	<td><div id="confirmPainAndRednessInBreast"></div></td>
+																</tr>
+																<tr>
+																	<td style="min-width: 328px"><spring:message code="com.phfi.anyPainfulLumpInBreast" /></td>
+																	<td><div id="confirmPainfulLumpInBreast"></div></td>
+																</tr>
+																<tr>
 																	<td style="min-width: 328px"><spring:message code="com.phfi.feelBreathless" /></td>
 																	<td><div id="confirmBreathless"></div></td>
+																</tr>
+																<tr>
+																	<td style="min-width: 350px"><spring:message code="com.phfi.whenFeelBreathless" /></td>
+																	<td><div id="confirmWhenFeelBreathless"></div></td>
 																</tr>
 																<tr>
 																	<td style="min-width: 328px"><spring:message code="com.phfi.haveCough" /></td>
 																	<td><div id="confirmHaveCough"></div></td>
 																</tr>
 																<tr>
+																	<td style="min-width: 350px"><spring:message code="com.phfi.howLongHadCough" /></td>
+																	<td><div id="confirmHowLongHadCough"></div></td>
+																</tr>
+																<tr>
 																	<td style="min-width: 328px"><spring:message code="com.phfi.haveAbdominalPain" /></td>
 																	<td><div id="confirmAbdominalPain"></div></td>
 																</tr>
 																<tr>
-																	<td style="min-width: 328px"><spring:message code="com.phfi.feltBabyMovePast12hours" /></td>
-																	<td><div id="confirmBlurreVission"></div></td>
+																	<td style="min-width: 350px"><spring:message code="com.phfi.whereItPain" /></td>
+																	<td><div id="confirmWhereItPain"></div></td>
 																</tr>
 																<tr>
 																	<td style="min-width: 328px"><spring:message code="com.phfi.vaginalDischargeSmellsUnpleasant" /></td>
@@ -1167,21 +1195,26 @@
 																	<td style="min-width: 328px"><spring:message code="com.phfi.haveBleeding" /></td>
 																	<td><div id="confirmAnyBleeding"></div></td>
 																</tr>
+																
 																<tr>
-																	<td style="min-width: 328px"><spring:message code="com.phfi.haveWatersBroken" /></td>
-																	<td><div id="confirmHaveWaterBroken"></div></td>
+																	<td style="min-width: 328px"><spring:message code="com.phfi.bleedingAfterDelivery" /></td>
+																	<td><div id="confirmBleedingAfterDelivery"></div></td>
+																</tr>
+																<tr>
+																	<td style="min-width: 328px"><spring:message code="com.phfi.clotsWhileBleeding" /></td>
+																	<td><div id="confirmClotsWhileBleeding"></div></td>
+																</tr>
+																<tr>
+																	<td style="min-width: 328px"><spring:message code="com.phfi.clothesChangeInDay" /></td>
+																	<td><div id="confirmClothesChangeInDay"></div></td>
+																</tr>
+																<tr>
+																	<td style="min-width: 328px"><spring:message code="com.phfi.bleedingIncreased" /></td>
+																	<td><div id="confirmBleedingIncreased"></div></td>
 																</tr>
 																<tr>
 																	<td style="min-width: 328px"><spring:message code="com.phfi.haveBurningOrPainWhileUrinating" /></td>
 																	<td><div id="confirmBurningPain"></div></td>
-																</tr>
-																<tr>
-																	<td style="min-width: 328px"><spring:message code="com.phfi.haveToeringsBecomeTighter" /></td>
-																	<td><div id="confirmRingTighter"></div></td>
-																</tr>
-																<tr>
-																	<td style="min-width: 328px"><spring:message code="com.phfi.hasDifficultTOWearBangles" /></td>
-																	<td><div id="confirmWearBangles"></div></td>
 																</tr>
 															</table>
 														</fieldset>

@@ -304,7 +304,7 @@
 										</fieldset>
 										<fieldset class="col-sm-12">
 											<fieldset class="col-sm-6">
-												<label><spring:message code="com.phfi.bleedingAfterDelivery" /><span
+												<label><spring:message code="com.phfi.bleedingAfterDeliveryq" /><span
 													class="required-field">*</span>
 												</label>
 											</fieldset>
@@ -396,7 +396,7 @@
 																	<td><div id="confirmBabyWeight"></div></td>
 																</tr>
 																<tr>
-																	<td style="min-width: 328px"><spring:message code="com.phfi.bleedingAfterDelivery" /></td>
+																	<td style="min-width: 328px"><spring:message code="com.phfi.bleedingAfterDeliveryq" /></td>
 																	<td><div id="confirmBleedingAfetrDelivery"></div></td>
 																</tr>
 															</table>

@@ -87,7 +87,7 @@
 													</div> 
 												</fieldset>
 												<fieldset class="col-sm-4"> 
-													<label class="control-label" for="">Asha Name</label>
+													<label class="control-label" for="">ASHA Name</label>
 													<form:input path="nameOfAsha" title="Asha Name" id="nameOfAsha" cssClass="form-control"/>
 													<div class="discriptionErrorMsg">
 														<span id="nameOfAshaErr" class="red-error">&nbsp;</span>
@@ -106,7 +106,7 @@
 															<form:option value="">.:Please Select:.</form:option>
 															<form:option value="High Risk">High Risk</form:option>
 															<form:option value="Risk">Risk</form:option>
-															<form:option value="No abnormality detected">No abnormality detected</form:option>
+															<form:option value="Very High Risk">Very High Risk</form:option>
 														</form:select>
 													<div class="discriptionErrorMsg">
 														<span id="clinicalStatusErr" class="red-error">&nbsp;</span>
@@ -158,7 +158,7 @@
 								<th>WID</th>
 								<th>Days To <br/> Deliver</th>
 								<th>Obstetric<br/> Score</th>
-								<th>Name Of<br/> Asha</th>
+								<th>Name Of<br/> The ASHA</th>
 								<th>Age</th>
 								<th>Cast</th>
 								<th>Findings</th>
