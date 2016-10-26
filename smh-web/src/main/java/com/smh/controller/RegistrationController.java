@@ -1,7 +1,6 @@
 package com.smh.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.FormParam;
 
+import org.apache.commons.lang3.text.WordUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.smh.constants.Constant;
 import com.smh.constants.PHFIWebConstant;
 import com.smh.constants.URLMappingConstants;
-import com.smh.enums.RoleLevel;
 import com.smh.exception.SmhAdminException;
-import com.smh.model.AdminUserRequest;
-import com.smh.model.AdminUserResponse;
 import com.smh.model.AllWidResponse;
 import com.smh.model.AllWomenResponse;
 import com.smh.model.PhfiDeliveryFormRequest;
@@ -36,8 +33,6 @@ import com.smh.model.PhfiRegistrationRequest;
 import com.smh.model.PhfiRegistrationResponse;
 import com.smh.model.PhfiVisitRequest;
 import com.smh.model.Response;
-import com.smh.model.UserRoleRequest;
-import com.smh.model.UserRoleResponse;
 import com.smh.service.RegistrationService;
 import com.smh.util.JsonUtil;
 import com.smh.util.PaginationUtil;
@@ -88,6 +83,7 @@ public class RegistrationController extends BaseController implements URLMapping
 	    ModelAndView modelAndView = new ModelAndView(ASHA_NEXT_LAYOUT); 
 	    logger.info("Entering :: RegistrationController ::processRegistrationCreate method ");
 		try {
+			/*PhfiRegistrationRequest phfiRegistrationRequestNew = getModifiedObject(phfiRegistrationRequest);*/
 			Response phfiResponse = registrationService.createRegistration(phfiRegistrationRequest);
 			if (phfiResponse.getResponseMessage().equalsIgnoreCase(Constant.SUCESS)) {
 				modelAndView.addObject(PHFIWebConstant.SUCCESS, Properties.getProperty("phfi_registration_success"));
@@ -104,6 +100,70 @@ public class RegistrationController extends BaseController implements URLMapping
 	    return modelAndView;
 	  }
 	
+	private PhfiRegistrationRequest getModifiedObject(PhfiRegistrationRequest p) {
+		PhfiRegistrationRequest  request= new PhfiRegistrationRequest();
+		request.setVillageId(p.getVillageId());
+		request.setMaternityStatus(p.getMaternityStatus());
+		request.setUid(p.getUid());
+		request.setRegDate(p.getRegDate());
+		request.setVillageName(WordUtils.capitalize(p.getVillageName()));
+		request.setPhc(WordUtils.capitalize(p.getPhc()));
+		request.setAshaName(WordUtils.capitalize(p.getAshaName()));
+		request.setAnmName(WordUtils.capitalize(p.getAnmName()));
+		request.setAshaFacilitatorName(WordUtils.capitalize(p.getAshaFacilitatorName()));
+		request.setWomenFirstName(WordUtils.capitalize(p.getWomenFirstName()));
+		request.setWomenHusbandName(WordUtils.capitalize(p.getWomenHusbandName()));
+		request.setWomenSurname(WordUtils.capitalize(p.getWomenSurname()));
+		request.setHusbandFirstName(WordUtils.capitalize(p.getHusbandFirstName()));
+		request.setHusbandFatherName(WordUtils.capitalize(p.getHusbandFatherName()));
+		request.setHusbandSurname(WordUtils.capitalize(p.getHusbandSurname()));
+		request.setStreetMarital(WordUtils.capitalize(p.getStreetMarital()));
+		/*request.setVillageMarital(WordUtils.capitalize(p.get));*/
+		request.setLandmarkMarital(WordUtils.capitalize(p.getLandmarkMarital()));
+		request.setTalukMarital(WordUtils.capitalize(p.getTalukMarital()));
+		request.setDistrictMarital(WordUtils.capitalize(p.getDistrictMarital()));
+		request.setPhone1Marital(p.getPhone1Marital());
+		request.setPhone2Marital(p.getPhone2Marital());
+		request.setStreetNatal(WordUtils.capitalize(p.getStreetNatal()));
+		request.setLandmarkNatal(WordUtils.capitalize(p.getLandmarkNatal()));
+		request.setTalukNatal(WordUtils.capitalize(p.getTalukNatal()));
+		request.setDistrictNatal(WordUtils.capitalize(p.getDistrictNatal()));
+		request.setPhone1Natal(p.getPhone1Natal());
+		request.setPhone2Natal(p.getPhone2Natal());
+		request.setCurrentPlace(WordUtils.capitalize(p.getCurrentPlace()));
+		request.setOtherCurrentPlace(WordUtils.capitalize(p.getOtherCurrentPlace()));
+		request.setAge(p.getAge());
+		request.setReligion(WordUtils.capitalize(p.getReligion()));
+		request.setEducation(WordUtils.capitalize(p.getEducation()));
+		request.setEducationOther(WordUtils.capitalize(p.getEducationOther()));
+		request.setOtherReligion(WordUtils.capitalize(p.getOtherReligion()));
+		request.setCaste(WordUtils.capitalize(p.getCaste()));
+		request.setCastcategory(WordUtils.capitalize(p.getCastcategory()));
+		request.setHeight(p.getHeight());
+		request.setHypertension(p.getHypertension());
+		request.setHeartdisease(p.getHeartdisease());
+		request.setDiabetes(p.getDiabetes());
+		request.setJaundice(p.getJaundice());
+		request.setThyroidproblem(p.getThyroidproblem());
+		request.setAnaemia(p.getAnaemia());
+		request.setAnyotherproblem(WordUtils.capitalize(p.getAnyotherproblem()));
+		request.setProblemDesc(WordUtils.capitalize(p.getProblemDesc()));
+		request.setPregnancyCount(p.getPregnancyCount());
+		request.setNoOfChildren(p.getNoOfChildren());
+		request.setDateOfRecentDelivery(p.getDateOfRecentDelivery());
+		request.setEarlyDelivery(p.getEarlyDelivery());
+		request.setCaesarean(p.getCaesarean());
+		request.setBreathlessness(p.getBreathlessness());
+		request.setSeverepallor(p.getSeverepallor());
+		request.setBleedexcessively(p.getBleedexcessively());
+		request.setLmp(p.getLmp());
+		request.setBloodgroup(p.getBloodgroup());
+		request.setCreatedBy(p.getCreatedBy());
+		request.setCreatedDate(p.getCreatedDate());
+		request.setUpdatedBy(p.getUpdatedBy());
+		request.setUpdatedDate(p.getUpdatedDate());
+		return request;
+	}
 	@RequestMapping(value = SHOW_PHFI_REG_SEARCH, method = RequestMethod.GET)
 	  public ModelAndView showRegistrationSearch(HttpServletRequest request,
 			  						 HttpServletResponse response,

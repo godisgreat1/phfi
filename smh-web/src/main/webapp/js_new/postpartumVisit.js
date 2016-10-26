@@ -122,6 +122,21 @@ function setAskTheWoman(){
 	setLable('confirmBurningPain',$('input[name=isBurningPain]:checked').val());
 	/*setLable('confirmRingTighter', get('toeRingsTighter').value.trim());*/
 	/*setLable('confirmWearBangles', get('isBangles').value.trim());*/
+	setLable('confirmChillsAndShivering', $('input[name=isFeverAssocated]:checked').val());
+	setLable('confirmFeverComeAndGo', $('input[name=isFeverComeAndGo]:checked').val());
+	
+	setLable('confirmDifficultyInFeedingTheBaby', $('input[name=isDifficultToFeed]:checked').val());
+	setLable('confirmPainAndRednessInBreast', $('input[name=painInBreast]:checked').val());
+	setLable('confirmPainfulLumpInBreast', $('input[name=lumpInBreast]:checked').val());
+	setLable('confirmWhenFeelBreathless', $('input[name=whenBreathless]:checked').val());
+	setLable('confirmHowLongHadCough', $('input[name=howLongHaveCough]:checked').val());
+	setLable('confirmWhereItPain', $('input[name=wherePain]:checked').val());
+	
+	setLable('confirmBleedingAfterDelivery', $('#noDayAfterDel').val());
+	setLable('confirmClotsWhileBleeding', $('input[name=isPassClotBleeding]:checked').val());
+	setLable('confirmClothesChangeInDay', $('#noOfClothes').val());
+	setLable('confirmBleedingIncreased', $('input[name=hasBleedingIncrease]:checked').val());
+	
 	return true;
 }
 

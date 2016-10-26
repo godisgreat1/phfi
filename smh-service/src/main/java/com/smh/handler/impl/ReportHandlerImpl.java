@@ -126,15 +126,16 @@ public class ReportHandlerImpl implements ReportHandler{
 					request.setFindings(findingAssessVisit[0]);
 					request.setClinicalAssesment(findingAssessVisit[1]);
 					request.setNoOfVisit(findingAssessVisit[2]);
-					if(null !=registration.getStatus() && "" !=registration.getStatus()){
+					/*if(null !=registration.getStatus() && "" !=registration.getStatus()){
 					request.setClinicalStatus(registration.getStatus());
 					}else{
 						request.setClinicalStatus(findingAssessVisit[8]);
 					}
-					if(null ==registration.getStatus() || "" ==registration.getStatus()){
-						registration.setStatus(findingAssessVisit[8]);
-						registrationDao.createRegistration(registration);
-					}
+					if(null ==registration.getStatus() || "" ==registration.getStatus()){*/
+					request.setClinicalStatus(findingAssessVisit[8]);
+					registration.setStatus(findingAssessVisit[8]);
+					registrationDao.createRegistration(registration);
+					//}
 				} catch (Exception e) {
 					logger.error("Error :: RegistrationHandlerImpl :: getFindings  method", e);
 				}
@@ -206,7 +207,7 @@ public class ReportHandlerImpl implements ReportHandler{
 			}
 			List<PostpartumVisit> postpartumList = reportDao.findByPWid(registration.getUid());
 			if(postpartumList.size()>0){
-				
+				p = g-a;
 				obstetricScore = "P"+p+"A"+a+"L"+l;
 			}
 			if(null != delivery ){
@@ -871,22 +872,7 @@ public class ReportHandlerImpl implements ReportHandler{
 					assesmentStatus.add(Condition.LOW);
 				}
 			}
-			if(servAnemiaFailureEmer == true){
-				clinicalAsses.add(Condition.SEVERE_ANEMIA);
-				assesmentStatus.add(Condition.EMERGENCY);
-			}else if(servAnemiaFailureHigh == true){
-				clinicalAsses.add(Condition.SEVERE_ANEMIA);
-				assesmentStatus.add(Condition.HIGH);
-			}else if(pregnancyVisit.getFirstHb() !="" && Double.parseDouble(pregnancyVisit.getFirstHb()) < Constant.SEVEN ){
-				clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-				assesmentStatus.add(Condition.HIGH);
-			}else if(pregnancyVisit.getFirstHb() !="" && Double.parseDouble(pregnancyVisit.getFirstHb()) < 10 ){
-				clinicalAsses.add(Condition.ANAEMIA);
-				assesmentStatus.add(Condition.LOW);
-			}else if(anaemia){
-				clinicalAsses.add(Condition.ANAEMIA);
-				assesmentStatus.add(Condition.LOW);
-			}
+			
 			if(Constant.YELLOW.equalsIgnoreCase(pregnancyVisit.getUpperEyeColor())){
 				clinicalAsses.add(Condition.ICTERUS_EVALUATION);
 				
@@ -909,10 +895,24 @@ public class ReportHandlerImpl implements ReportHandler{
 						isAnemiaHigh = true;
 					}
 			}
-			
-			if(isAnemiaHigh){
+			if(servAnemiaFailureEmer == true){
+				clinicalAsses.add(Condition.SEVERE_ANEMIA);
+				assesmentStatus.add(Condition.EMERGENCY);
+			}else if(servAnemiaFailureHigh == true){
+				clinicalAsses.add(Condition.SEVERE_ANEMIA);
+				assesmentStatus.add(Condition.HIGH);
+			}else if(pregnancyVisit.getFirstHb() !="" && Double.parseDouble(pregnancyVisit.getFirstHb()) < Constant.SEVEN ){
+				clinicalAsses.add(Condition.SEVERE_ANAEMIA);
+				assesmentStatus.add(Condition.HIGH);
+			}else if(isAnemiaHigh){
 				clinicalAsses.add("?anemia in heart failure");
 				assesmentStatus.add(Condition.HIGH);
+			}else if(pregnancyVisit.getFirstHb() !="" && Double.parseDouble(pregnancyVisit.getFirstHb()) < 10 ){
+				clinicalAsses.add(Condition.ANAEMIA);
+				assesmentStatus.add(Condition.LOW);
+			}else if(anaemia){
+				clinicalAsses.add(Condition.ANAEMIA);
+				assesmentStatus.add(Condition.LOW);
 			}else if(isAnemiaLow){
 				clinicalAsses.add("? anemia");
 				assesmentStatus.add(Condition.LOW);
@@ -1231,8 +1231,8 @@ public class ReportHandlerImpl implements ReportHandler{
 				// servrity high
 				}
 			}
-			if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsAnkleDepression())){
-				if(!"".equalsIgnoreCase(postpartumVisit.getFirstUrine()) && !"Nil".equalsIgnoreCase(postpartumVisit.getFirstUrine())){
+				if (Constant.Yes.equalsIgnoreCase(postpartumVisit.getIsAnkleDepression())|| "Traces".equalsIgnoreCase(postpartumVisit.getFirstUrine()) ||
+						"1+".equalsIgnoreCase(postpartumVisit.getFirstUrine()) || "2+".equalsIgnoreCase(postpartumVisit.getFirstUrine()) || "3+".equalsIgnoreCase(postpartumVisit.getFirstUrine())){
 			
 					if(Constant.Yes.equalsIgnoreCase(postpartumVisit.getHaveHeadaches())
 					|| Constant.Yes.equalsIgnoreCase(postpartumVisit.getHaveBlurredVision())
@@ -1240,7 +1240,6 @@ public class ReportHandlerImpl implements ReportHandler{
 				clinicalAsses.add(Condition.IMMINENT_ECLAMPSIA);
 				assesmentStatus.add(Condition.HIGH);
 					}
-			}
 			}
 			
 			
@@ -1432,22 +1431,7 @@ public class ReportHandlerImpl implements ReportHandler{
 				assesmentStatus.add(Condition.LOW);
 				//servrity low
 			}
-			if(servAnemiaFailureEmer == true){
-				clinicalAsses.add(Condition.SEVERE_ANEMIA);
-				assesmentStatus.add(Condition.EMERGENCY);
-			}else if(servAnemiaFailureHigh == true){
-				clinicalAsses.add(Condition.SEVERE_ANEMIA);
-				assesmentStatus.add(Condition.HIGH);
-			}else if(postpartumVisit.getFirstHb() !="" && Double.parseDouble(postpartumVisit.getFirstHb()) < Constant.SEVEN ){
-				clinicalAsses.add(Condition.SEVERE_ANAEMIA);
-				assesmentStatus.add(Condition.HIGH);
-			}else if(postpartumVisit.getFirstHb() !="" && Double.parseDouble(postpartumVisit.getFirstHb()) < 10 ){
-				clinicalAsses.add(Condition.ANAEMIA);
-				assesmentStatus.add(Condition.LOW);
-			}else if(anaemia){
-				clinicalAsses.add(Condition.ANAEMIA);
-				assesmentStatus.add(Condition.LOW);
-			}
+			
 			
 			if(Constant.SPUTUM_TEST_POSITIVE.equalsIgnoreCase(postpartumVisit.getSputumTest())){
 				clinicalAsses.add(Condition.TUBERCULOSIS);
@@ -1466,10 +1450,24 @@ public class ReportHandlerImpl implements ReportHandler{
 						isAnemiaHigh = true;
 					}
 			}
-			
-			if(isAnemiaHigh){
+			if(servAnemiaFailureEmer == true){
+				clinicalAsses.add(Condition.SEVERE_ANEMIA);
+				assesmentStatus.add(Condition.EMERGENCY);
+			}else if(servAnemiaFailureHigh == true){
+				clinicalAsses.add(Condition.SEVERE_ANEMIA);
+				assesmentStatus.add(Condition.HIGH);
+			}else if(postpartumVisit.getFirstHb() !="" && Double.parseDouble(postpartumVisit.getFirstHb()) < Constant.SEVEN ){
+				clinicalAsses.add(Condition.SEVERE_ANAEMIA);
+				assesmentStatus.add(Condition.HIGH);
+			}else if(isAnemiaHigh){
 				clinicalAsses.add("?anemia in heart failure");
 				assesmentStatus.add(Condition.HIGH);
+			}else if(postpartumVisit.getFirstHb() !="" && Double.parseDouble(postpartumVisit.getFirstHb()) < 10 ){
+				clinicalAsses.add(Condition.ANAEMIA);
+				assesmentStatus.add(Condition.LOW);
+			}else if(anaemia){
+				clinicalAsses.add(Condition.ANAEMIA);
+				assesmentStatus.add(Condition.LOW);
 			}else if(isAnemiaLow){
 				clinicalAsses.add("? anemia");
 				assesmentStatus.add(Condition.LOW);
@@ -2407,16 +2405,14 @@ public class ReportHandlerImpl implements ReportHandler{
 				if(Constant.DONE.equalsIgnoreCase(pregnancyVisit.getUltrasound())){
 					StringBuilder sb = new StringBuilder();
 					sb.append("Ultrasound Scan = ");
-					if(null != pregnancyVisit.getFirstUltrasound() && "" != pregnancyVisit.getFirstUltrasound()){
-						sb.append(pregnancyVisit.getFirstUltrasound());
+					sb.append("USG done");
+					if(null != pregnancyVisit.getUltrasoundDateOne() && "" != pregnancyVisit.getUltrasoundDateOne()){
 						sb.append(" (");
 						sb.append(pregnancyVisit.getUltrasoundDateOne());
-						sb.append(" );");
-					}
-					if(null != pregnancyVisit.getSecUltrasound() && "" != pregnancyVisit.getSecUltrasound()){
-						sb.append(pregnancyVisit.getSecUltrasound());
-						sb.append(" (");
-						sb.append(pregnancyVisit.getUltrasoundDateSec());
+						if(null != pregnancyVisit.getUltrasoundDateSec() && "" != pregnancyVisit.getUltrasoundDateSec()){
+							sb.append(", ");
+							sb.append(pregnancyVisit.getUltrasoundDateSec());
+						}
 						sb.append(" );");
 					}
 					testResult.add(sb.toString());

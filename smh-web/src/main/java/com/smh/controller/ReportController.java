@@ -28,7 +28,6 @@ import com.smh.model.MedicalCaseSheetDTO;
 import com.smh.model.PhfiDeliveryFormResponse;
 import com.smh.model.PhfiDoctorFormRequest;
 import com.smh.model.PhfiPostPartumVisitResponse;
-import com.smh.model.PhfiRegistrationRequest;
 import com.smh.model.PhfiRegistrationResponse;
 import com.smh.model.PhfiVisitResponse;
 import com.smh.model.ReportRequest;
@@ -38,6 +37,7 @@ import com.smh.util.AshaReportDownload;
 import com.smh.util.DeliveryMasterRawDataUtil;
 import com.smh.util.DoctorReportDownload;
 import com.smh.util.MasterReportDownload;
+import com.smh.util.MedicalCaseSheetDownload;
 import com.smh.util.PaginationUtil;
 import com.smh.util.PostpartumMasterRawDataUtil;
 import com.smh.util.PreganancyMasterRawDataUtil;
@@ -69,7 +69,7 @@ public class ReportController extends BaseController implements URLMappingConsta
 			  						  Map model) {
 	    ModelAndView modelAndView = new ModelAndView(SHOW_MASTER_REPORT);    
 	    logger.info("Entering:: ReportController:: processMasterReportSearch method");
-		session.setAttribute(Constant.PHFI_REQUEST, reportRequest);
+		
 		
 		try {
 			model.put("reportRequest",reportRequest);
@@ -79,6 +79,7 @@ public class ReportController extends BaseController implements URLMappingConsta
 			if (Constant.SUCCESS.equalsIgnoreCase(reportResponse.getResponseMessage())) {
 				List<ReportRequest> masterReport = reportResponse.getReportRequest();
 				model.put("totalCount", reportResponse.getNoOfRecords());
+				reportRequest.setNoOfRecords(reportResponse.getNoOfRecords());
 				modelAndView.addObject("resultflag", true);
 				modelAndView = PaginationUtil.getPagenationModel(modelAndView, reportResponse.getNoOfRecords());
 				model.put("masterReportList", masterReport);
@@ -90,7 +91,7 @@ public class ReportController extends BaseController implements URLMappingConsta
 			logger.error("Error:: ReportController:: processMasterReportSearch method",e);
 			modelAndView.setViewName(INVALID_PAGE);
 		}
-
+		session.setAttribute(Constant.PHFI_REQUEST, reportRequest);
 		logger.info("Exiting:: ReportController:: processMasterReportSearch method");
 		return modelAndView;
 	  }
@@ -323,14 +324,15 @@ public class ReportController extends BaseController implements URLMappingConsta
 											HttpServletResponse response, 
 											Map model, HttpSession session,
 											@FormParam("downLoadPageNumber") final Integer downLoadPageNumber,
-											@FormParam("downloadType") final String downloadType) {
+											@FormParam("downloadType") final String downloadType,
+											 @FormParam("totalRecords") final Integer totalRecords) {
 			ModelAndView modelAndView = new ModelAndView(SHOW_MASTER_REPORT);
 			logger.info("Entering :: ReportController ::getMasterReport method ");
-			ReportRequest reportRequest = new ReportRequest();
+			ReportRequest reportRequest = (ReportRequest) session.getAttribute(Constant.PHFI_REQUEST);
 			try {
 				model.put("reportRequest",reportRequest);
 				reportRequest.setPageIndex(Constant.ONE);
-				reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
+				reportRequest.setPageSize(reportRequest.getNoOfRecords());
 				ReportResponse reportResponse = reportService.getMasterReport(reportRequest);
 				if (reportResponse != null && !CollectionUtils.isEmpty(reportResponse.getReportRequest())) {
 
@@ -360,7 +362,7 @@ public class ReportController extends BaseController implements URLMappingConsta
 			try {
 				reportRequest.setMaternityStatus(womanType);
 				model.put("reportRequest", new ReportRequest());
-				reportRequest.setPageIndex(Constant.ONE);
+				reportRequest.setPageIndex(downLoadPageNumber);
 				reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
 				ReportResponse reportResponse = reportService.getMasterReport(reportRequest);
 				if (reportResponse != null && !CollectionUtils.isEmpty(reportResponse.getReportRequest())) {
@@ -390,7 +392,7 @@ public class ReportController extends BaseController implements URLMappingConsta
 			try {
 				reportRequest.setMaternityStatus(womanType);
 				model.put("reportRequest", new ReportRequest());
-				reportRequest.setPageIndex(Constant.ONE);
+				reportRequest.setPageIndex(downLoadPageNumber);
 				reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
 				ReportResponse reportResponse = reportService.getMasterReport(reportRequest);
 				if (reportResponse != null && !CollectionUtils.isEmpty(reportResponse.getReportRequest())) {
@@ -439,6 +441,37 @@ public class ReportController extends BaseController implements URLMappingConsta
 			return modelAndView;
 		}
 	 	
+	 	@RequestMapping(value = "/getCaseSheetDownload", method = RequestMethod.GET)
+		  public ModelAndView getCaseSheetDownload(HttpServletRequest request,
+						  						 HttpServletResponse response,
+						  						 HttpSession session,
+						  						 Map model) {
+		    ModelAndView modelAndView = new ModelAndView(MEDICAL_CASE_SHEET); 
+		    logger.info("Entering :: ReportController:: getMasterRawRawData method");
+		    ReportRequest reportRequest = new ReportRequest();
+		    String uuid = request.getParameter("wid");
+		    reportRequest.setWid(Integer.parseInt(uuid));
+			try {
+				reportRequest.setPageIndex(Constant.ONE);
+				reportRequest.setPageSize(Constant.MAX_ENTITIES_PAGINATION_DISPLAY_SIZE);
+				MedicalCaseSheetDTO reportResponse = reportService.getCaseSheetReport(reportRequest);
+				if (Constant.SUCCESS.equalsIgnoreCase(reportResponse.getResponseMessage())) {
+					MedicalCaseSheetDownload.downloadCashSheetPdf(reportResponse, response);
+					/*List<ReportRequest> masterReport = reportResponse.getReportRequest();*/
+					/*model.put("totalCount", reportResponse.getNoOfRecords());
+					modelAndView.addObject("resultflag", true);
+					modelAndView = PaginationUtil.getPagenationModel(modelAndView, reportResponse.getNoOfRecords());
+					model.put("medicalCaseSheet", reportResponse);*/
+				} else {
+					/*modelAndView.addObject("resultflag", true);
+					model.put("medicalCaseSheet", new MedicalCaseSheetDTO());*/
+				}
+			} catch (Exception e) {
+				logger.error("Error:: ReportController:: processAshaFeedbackReportSearch method",e);
+				modelAndView.setViewName(INVALID_PAGE);
+			}
+		    return null;
+		  }
 	 	
 	 	
 }

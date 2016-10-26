@@ -41,7 +41,7 @@ public class Condition {
 	public static final String MASTITIS_BREAST_ABSCESS="Mastitis and/or breast abscess";
 	public static final String BREAST_ABSCESS ="Breast abscess";
 	public static final String PSYCHOSIS ="Psychosis";
-	public static final String DEPRESSION_PSYHOSIS="Depression and/or psyhosis";
+	public static final String DEPRESSION_PSYHOSIS="Depression and/or psychosis";
 	public static final String DEPRESSION = "Depression";
 	public static final String GESTATIONAL_DIABETES = "Gestational diabetes";
 	public static final String ANAEMIA ="Anaemia";

@@ -12,7 +12,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   	<title>Phif</title>
+   	<title>PHIF</title>
 	<link rel="icon" href="../images/favicon.png" type="image/png">
     <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -65,6 +65,7 @@
 								<form action="getmasterReport" name="downloadReport" method="post">
 									<input type="hidden" id="downloadPageNumberId" name="downLoadPageNumber" /> 
 									<input type="hidden" id="downloadTypeId" name="downloadType" />
+									<input type="hidden" id="totalRecordsId" name="totalRecords" />
 								</form>
 								<!--Success and Failure Message End-->
 								<!-- Page Form Start -->
@@ -104,8 +105,8 @@
 													<label class="control-label" for="">Assestment Status</label>
 														<form:select path="clinicalStatus" id="clinicalStatus"	cssClass="form-control">
 															<form:option value="">.:Please Select:.</form:option>
-															<form:option value="High Risk">High Risk</form:option>
 															<form:option value="Risk">Risk</form:option>
+															<form:option value="High Risk">High Risk</form:option>
 															<form:option value="Very High Risk">Very High Risk</form:option>
 														</form:select>
 													<div class="discriptionErrorMsg">
